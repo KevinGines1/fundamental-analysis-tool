@@ -1,0 +1,10 @@
+enum Sector {
+    FINANCIALS = "FINANCIALS",
+    INDUSTRIAL = "INDUSTRIAL",
+    HOLDING_FIRMS = "HOLDING_FIRMS",
+    PROPERTY = "PROPERTY",
+    SERVICES = "SERVICES",
+    MINING_AND_OIL = "MINING_AND_OIL"
+}
+
+export default Sector;
