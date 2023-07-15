@@ -20,11 +20,11 @@ import { calculateRatio } from '../utils/formulas';
 
 const generateRatioRow = (row: Ratio, companies: Company[]) => {
     return (
-        <TableRow>
+        <TableRow key={row.name}>
             <TableCell colSpan={2}>{row.name}</TableCell>
-            {companies.map(company => {
+            {companies.map((company, index) => {
                 return (
-                    <TableCell>
+                    <TableCell key={`${index}-${row.name}-${company.name}`}>
                         {calculateRatio(row.name, row.formula, company)}
                     </TableCell>
                 )
@@ -49,9 +49,9 @@ function RatiosTable(props: RatiosTableProps) {
                     <TableRow>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
-                        {companies.map(company => {
+                        {companies.map((company, index) => {
                             return(
-                                <TableCell>{company.stockCode}</TableCell>
+                                <TableCell key={`${index}-${company.stockCode}`}>{company.stockCode}</TableCell>
                             );
                         })}
                         <TableCell>Guide</TableCell>

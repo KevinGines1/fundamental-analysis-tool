@@ -7,6 +7,7 @@ export interface Company {
     earningsPerShareBasic: number;
     sector: Sector;
     PERatio?: number | string;
+    fairValue?: number;
 
     currentAssets?: number;
     currentLiabilities?: number;

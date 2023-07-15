@@ -8,26 +8,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 
-import GenericTableProps from '../types/GenericTableProps';
+import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
 
-import { getAverageSectorPE } from '../utils/formulas';
 
-function getRowColor(row: Company, averageSectorPE: number) {
-    if(typeof(row.PERatio) === "string") {
-        return "blue";
-    } else if (row.PERatio === undefined) {
-        return "blue";
-    } else if (row.PERatio > averageSectorPE) {
-        return "red"; // overvalue
-    } else {
-        return "green" // undervalued
-    }
-}
-
-function GenericTable(props: GenericTableProps) {
+function FairValueTable(props: CompaniesTableProps) {
     const {title, subtitle, headers, data} = props;
-    const averageSectorPE = getAverageSectorPE(data);
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>
@@ -39,7 +25,7 @@ function GenericTable(props: GenericTableProps) {
                             {
                                 headers.map(header=>{
                                     return(
-                                        <TableCell>{header}</TableCell>
+                                        <TableCell key={header}>{header}</TableCell>
                                     );
                                 })
                             }
@@ -48,14 +34,12 @@ function GenericTable(props: GenericTableProps) {
                     <TableBody>
                         {
                             data.map((row: Company)=>{
-                                const rowColor = getRowColor(row, averageSectorPE);
                                 return(
-                                    <TableRow sx={{"backgroundColor": rowColor}}>
-                                        <TableCell>{row.name}</TableCell>
+                                    <TableRow key={`${row.name}-${row.stockCode}`}>
                                         <TableCell>{row.stockCode}</TableCell>
                                         <TableCell>{row.stockPrice}</TableCell>
                                         <TableCell>{row.earningsPerShareBasic}</TableCell>
-                                        <TableCell>{row.PERatio}</TableCell>
+                                        <TableCell>{row.fairValue}</TableCell>
                                     </TableRow>
                                 );
                             })
@@ -67,4 +51,4 @@ function GenericTable(props: GenericTableProps) {
         );
 }
 
-export default GenericTable;
+export default FairValueTable;

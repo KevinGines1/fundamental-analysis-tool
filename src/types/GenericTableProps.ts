@@ -1,6 +1,6 @@
 import { Company } from "./company";
 
-export default interface GenericTableProps {
+export default interface CompaniesTableProps {
     title: string;
     subtitle?: string;
     headers: string[];

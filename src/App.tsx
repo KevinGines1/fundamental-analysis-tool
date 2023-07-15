@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
-import GenericTable from './components/Table';
+import CompaniesTable from './components/CompaniesTable';
 import RatiosTable from './components/RatiosTable';
 import { listOfCompaniesHeaders } from './utils/constants';
 import Company from './types/company';
 import Sector from './enums/Sector';
 import { getAverageSectorPE, getCompanyPERatios } from './utils/formulas';
+import FairValueTable from './components/FairValueTable';
 
 function App() {
-  var sampleCompanies: Company[] = [
+  const sampleCompanies: Company[] = [
     {
       name: 'Arthaland Corporation',
       sector: Sector.FINANCIALS,
@@ -68,17 +69,23 @@ function App() {
   ]
   ;
 
-  sampleCompanies = getCompanyPERatios(sampleCompanies);
-
+  const companiesWithPERatios = getCompanyPERatios(sampleCompanies);
+  
   return (
     <div className="App">
-        <GenericTable
+        <CompaniesTable
           title="FINANCIALS"
-          subtitle={`Average Sector PE: ${getAverageSectorPE(sampleCompanies).toString()}`}
+          subtitle={`Average Sector PE: ${getAverageSectorPE((companiesWithPERatios)).toString()}`}
           headers={listOfCompaniesHeaders} 
-          data={sampleCompanies}
+          data={companiesWithPERatios}
         />
-    <RatiosTable companies={sampleCompanies.slice(0,5)}/>
+      <RatiosTable companies={sampleCompanies.slice(0,5)}/>
+      <FairValueTable
+        title={"Fair Value Table"}
+        subtitle={`Average Sector PE: ${getAverageSectorPE(companiesWithPERatios).toString()}`}
+        headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
+        data={[]}
+      />
     </div>
   );
 }

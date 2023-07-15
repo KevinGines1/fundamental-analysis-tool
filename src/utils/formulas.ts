@@ -3,18 +3,15 @@ import Company from "../types/company";
 import { ASSET_TO_EQUITY_RATIO, CURRENT_RATIO, DEBT_RATIO, DEBT_TO_EQUITY_RATIO, GROSS_PROFIT_MARGIN, INTEREST_COVERAGE, NET_PROFIT_MARGIN, PRICE_EARNINGS_RATIO, QUICK_RATIO, RETURN_ON_ASSETS, RETURN_ON_EQUITY, SOLVENCY_RATIO } from "./ratios";
 
 export const getPERatio = (stockPrice: number, eps: number) => {
-    try {
-        return stockPrice/eps;
-    } catch {
-        return "NA";
-    }
+    return stockPrice/eps;
 }
 
 export const getCompanyPERatios = (companies: Company[]) => {
     return companies.map(company => {
+        const ratio = getPERatio(company.stockPrice, company.earningsPerShareBasic);
         return {
             ...company,
-            "PERatio": getPERatio(company.stockPrice, company.earningsPerShareBasic)
+            PERatio: Number.isNaN(ratio) ? "NA" : ratio
         }
     })
 }
