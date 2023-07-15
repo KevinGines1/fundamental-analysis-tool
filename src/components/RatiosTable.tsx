@@ -16,24 +16,20 @@ import ratios from '../utils/ratios';
 import RatiosTableProps from '../types/RatiosTableProps';
 import RatioClassication from '../enums/RatioClassification';
 import Company from '../types/company';
-
-const calculateRatio = (formula: (op1: number, op2: number) => number, companies: Company[]) => {
-    return companies.map(
-        company => {
-            return (
-                <TableCell>
-                    // TODO: move this to util folder and create separate functions for each ratio
-                </TableCell>
-            );
-        }
-    )
-}
+import { calculateRatio } from '../utils/formulas';
 
 const generateRatioRow = (row: Ratio, companies: Company[]) => {
     return (
         <TableRow>
             <TableCell colSpan={2}>{row.name}</TableCell>
-            {calculateRatio(row.formula, companies)}
+            {companies.map(company => {
+                return (
+                    <TableCell>
+                        {calculateRatio(row.name, row.formula, company)}
+                    </TableCell>
+                )
+            })}
+            <TableCell>{row.guide}</TableCell>
         </TableRow>
     );
 }
