@@ -24,8 +24,11 @@ const generateRatioRow = (row: Ratio, companies: Company[]) => {
             <TableCell colSpan={2}>{row.name}</TableCell>
             {companies.map((company, index) => {
                 return (
-                    <TableCell key={`${index}-${row.name}-${company.name}`}>
-                        {calculateRatio(row.name, row.formula, company)}
+                    <TableCell 
+                        key={`${index}-${row.name}-${company.name}`}
+                        size={"small"}
+                    >
+                        {calculateRatio(row.name, row.formula, company).toFixed(2)}
                     </TableCell>
                 )
             })}
@@ -42,55 +45,55 @@ function RatiosTable(props: RatiosTableProps) {
     const profitabilityRatios: Ratio[] = get(groupedRatios, RatioClassication.PROFITABILITY, []);
     return(
         <>
-        <Typography variant="h4">Ratios</Typography>
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        {companies.map((company, index) => {
-                            return(
-                                <TableCell key={`${index}-${company.stockCode}`}>{company.stockCode}</TableCell>
-                            );
-                        })}
-                        <TableCell>Guide</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow>
-                        <TableCell align={"center"} colSpan={8}>{RatioClassication.LIQUIDITY_RATIO}</TableCell>
-                    </TableRow>
-                    {
-                        liquidityRatios.map(
-                            r => {
-                                return generateRatioRow(r, companies);
-                            }
-                        )
-                    }
-                    <TableRow>
-                        <TableCell align={"center"} colSpan={8}>{RatioClassication.FINANCIAL_LEVERAGE}</TableCell>
-                    </TableRow>
-                    {
-                        financialLeverageRatios.map(
-                            r => {
-                                return generateRatioRow(r, companies);
-                            }
-                        )
-                    }
-                    <TableRow>
-                        <TableCell align={"center"} colSpan={8}>{RatioClassication.PROFITABILITY}</TableCell>
-                    </TableRow>
-                    {
-                        profitabilityRatios.map(
-                            r => {
-                                return generateRatioRow(r, companies);
-                            }
-                        )
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
+            <Typography variant="h4">Ratios</Typography>
+            <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+                <Table sx={{minWidth: 650}} size="small">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            {companies.map((company, index) => {
+                                return(
+                                    <TableCell key={`${index}-${company.stockCode}`}>{company.stockCode}</TableCell>
+                                );
+                            })}
+                            <TableCell>Guide</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell align={"center"} colSpan={8}>{RatioClassication.LIQUIDITY_RATIO}</TableCell>
+                        </TableRow>
+                        {
+                            liquidityRatios.map(
+                                r => {
+                                    return generateRatioRow(r, companies);
+                                }
+                            )
+                        }
+                        <TableRow>
+                            <TableCell align={"center"} colSpan={8}>{RatioClassication.FINANCIAL_LEVERAGE}</TableCell>
+                        </TableRow>
+                        {
+                            financialLeverageRatios.map(
+                                r => {
+                                    return generateRatioRow(r, companies);
+                                }
+                            )
+                        }
+                        <TableRow>
+                            <TableCell align={"center"} colSpan={8}>{RatioClassication.PROFITABILITY}</TableCell>
+                        </TableRow>
+                        {
+                            profitabilityRatios.map(
+                                r => {
+                                    return generateRatioRow(r, companies);
+                                }
+                            )
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </>
     );
 }

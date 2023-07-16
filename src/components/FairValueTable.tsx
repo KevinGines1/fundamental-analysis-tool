@@ -37,9 +37,9 @@ function FairValueTable(props: CompaniesTableProps) {
                                 return(
                                     <TableRow key={`${row.name}-${row.stockCode}`}>
                                         <TableCell>{row.stockCode}</TableCell>
-                                        <TableCell>{row.stockPrice}</TableCell>
-                                        <TableCell>{row.earningsPerShareBasic}</TableCell>
-                                        <TableCell>{row.fairValue}</TableCell>
+                                        <TableCell>{row.stockPrice.toFixed(2)}</TableCell>
+                                        <TableCell>{row.earningsPerShareBasic.toFixed(2)}</TableCell>
+                                        <TableCell>{row.fairValue?.toFixed(2)}</TableCell>
                                     </TableRow>
                                 );
                             })

@@ -32,8 +32,12 @@ function CompaniesTable(props: CompaniesTableProps) {
         <>
             <Typography variant="h4" component="div">{title}</Typography>
             <Typography variant="h6" component="div">{subtitle || ""}</Typography>
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth: 650}} size="small">
+            <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+                <Table 
+                    sx={{minWidth: 650}} 
+                    size="small"
+                    stickyHeader
+                >
                     <TableHead>
                         <TableRow>
                             {
@@ -50,12 +54,15 @@ function CompaniesTable(props: CompaniesTableProps) {
                             data.map((row: Company)=>{
                                 const rowColor = getRowColor(row, averageSectorPE);
                                 return(
-                                    <TableRow key={row.stockCode} sx={{"backgroundColor": rowColor}}>
-                                        <TableCell>{row.name}</TableCell>
-                                        <TableCell>{row.stockCode}</TableCell>
-                                        <TableCell>{row.stockPrice}</TableCell>
-                                        <TableCell>{row.earningsPerShareBasic}</TableCell>
-                                        <TableCell>{row.PERatio}</TableCell>
+                                    <TableRow 
+                                        key={row.stockCode} 
+                                        sx={{"backgroundColor": rowColor}}
+                                    >
+                                        <TableCell size={"small"}>{row.name}</TableCell>
+                                        <TableCell size={"small"}>{row.stockCode}</TableCell>
+                                        <TableCell size={"small"}>{row.stockPrice.toFixed(2)}</TableCell>
+                                        <TableCell size={"small"}>{row.earningsPerShareBasic.toFixed(2)}</TableCell>
+                                        <TableCell size={"small"}>{Number(row.PERatio).toFixed(2)}</TableCell>
                                     </TableRow>
                                 );
                             })
