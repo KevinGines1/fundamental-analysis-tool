@@ -4,11 +4,14 @@ import FundamentalyAnalysisDashboard from './pages/FundamentalAnalysisDashboard'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-
 function App() {
   const [open, setOpen] = useState(false);
   
   return (
+
+    // TODO: generate FairValue table
+    // TODO: make companies in CompaniesTable editable (click row and then edit)
+  
     <div className="App">
       <AppBar position={"static"}>
         <Toolbar>

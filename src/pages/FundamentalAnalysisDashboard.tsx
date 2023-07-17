@@ -7,6 +7,7 @@ import Company from '../types/company';
 import { listOfCompaniesHeaders } from '../utils/constants';
 import { getCompanyPERatios, getAverageSectorPE } from '../utils/formulas';
 import { Grid } from '@mui/material';
+import { useAppSelector } from '../app/hooks';
 
 function FundamentalyAnalysisDashboard() {
     const sampleCompanies: Company[] = [
@@ -70,6 +71,7 @@ function FundamentalyAnalysisDashboard() {
       ;
     
       const companiesWithPERatios = getCompanyPERatios(sampleCompanies);
+      const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
     return (
         <Grid 
             container 
@@ -94,10 +96,11 @@ function FundamentalyAnalysisDashboard() {
                 data={[]}
                 />
             </Grid>
-            <Grid xs={12}>
-                <RatiosTable companies={sampleCompanies.slice(0,5)}/>
-            </Grid>
-            
+            {selectedCompanies.length >= 3 && 
+              <Grid xs={12}>
+                <RatiosTable companies={getCompanyPERatios(selectedCompanies)}/>
+              </Grid>
+            }
     </Grid>
     );
 }
