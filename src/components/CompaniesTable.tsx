@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Alert, Checkbox, Typography } from '@mui/material';
+import { Alert, Button, Checkbox, Tooltip, Typography } from '@mui/material';
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -14,6 +14,7 @@ import Company from '../types/company';
 import { getAverageSectorPE } from '../utils/formulas';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { addToSelectedCompanies, removeFromSelectedCompanies } from '../features/company/company';
+import UpdateCompanyModal from './UpdateCompanyModal';
 
 function getRowColor(row: Company, averageSectorPE: number) {
     if(typeof(row.PERatio) === "string") {
@@ -33,6 +34,8 @@ function CompaniesTable(props: CompaniesTableProps) {
     const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
     const dispatch = useAppDispatch();
     const numSelected = selectedCompanies.length;
+    const [showModal, setShowModal] = useState(false);
+    const [companyToEdit, setCompanyToEdit] = useState<Company>();
 
     const handleOnCheck = (company: Company, companySelected: boolean) => {
         if(numSelected === 5 && !companySelected) return;
@@ -42,6 +45,11 @@ function CompaniesTable(props: CompaniesTableProps) {
             return;
         } 
         dispatch(addToSelectedCompanies(company));
+    }
+
+    const handleButtonClick = (company: Company) => {
+        setCompanyToEdit(company);
+        setShowModal(true);
     }
     
     return (
@@ -76,11 +84,27 @@ function CompaniesTable(props: CompaniesTableProps) {
                                     <TableRow 
                                         key={row.stockCode} 
                                         sx={{"backgroundColor": rowColor}}
+                                        hover
                                     >
-                                        <TableCell size={"small"}>
+                                        <TableCell size={"small"} padding={"checkbox"}>
                                             <Checkbox checked={companySelected} onClick={() => {handleOnCheck(row, companySelected)}}/>
                                         </TableCell>
-                                        <TableCell size={"small"}>{row.name}</TableCell>
+                                        <TableCell size={"small"}>
+                                            <Tooltip
+                                                title={"Click to update company info & data"}
+                                                placement={"right-start"}
+                                            >
+                                                <Button 
+                                                    variant={"text"}
+                                                    sx={{color: "black"}}
+                                                    onClick={() => { 
+                                                        handleButtonClick(row);
+                                                    }}
+                                                >
+                                                    {row.name}
+                                                </Button>
+                                            </Tooltip>
+                                        </TableCell>
                                         <TableCell size={"small"}>{row.stockCode}</TableCell>
                                         <TableCell size={"small"}>{row.stockPrice.toFixed(2)}</TableCell>
                                         <TableCell size={"small"}>{row.earningsPerShareBasic.toFixed(2)}</TableCell>
@@ -92,6 +116,11 @@ function CompaniesTable(props: CompaniesTableProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <UpdateCompanyModal
+                showModal={showModal}
+                companyToEdit={companyToEdit}
+                onClose={()=>setShowModal(false)}
+            />
         </>
         );
 }

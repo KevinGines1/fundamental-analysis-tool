@@ -10,6 +10,9 @@ function App() {
   return (
 
     // TODO: make companies in CompaniesTable editable (click row and then edit)
+    // TODO: refactor code such that totalLiabilities === totalDebt
+    // TODO: fully implement modal to update company info
+    // TODO: upload company info from excel sheet feature
   
     <div className="App">
       <AppBar position={"static"}>
