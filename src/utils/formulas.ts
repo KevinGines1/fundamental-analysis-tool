@@ -27,6 +27,15 @@ export const calculateRatio = (ratioName: string, formula: (op1: number, op2: nu
     return formula(op1, op2);
 }
 
+export const getCompanyFairValues = (companies: Company[]): Company[] => {
+    return companies.map((company) => {
+        return {
+            ...company, 
+            fairValue: (company.stockPrice * company.earningsPerShareBasic)
+        }
+    });
+}
+
 const getFormulaParameters = (ratioName: string, company: Company): FormulaParameters => {
     switch(ratioName){
         case CURRENT_RATIO:

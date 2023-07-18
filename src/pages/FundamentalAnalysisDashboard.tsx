@@ -5,9 +5,10 @@ import FairValueTable from '../components/FairValueTable';
 import Sector from '../enums/Sector';
 import Company from '../types/company';
 import { listOfCompaniesHeaders } from '../utils/constants';
-import { getCompanyPERatios, getAverageSectorPE } from '../utils/formulas';
+import { getCompanyPERatios, getAverageSectorPE, getCompanyFairValues } from '../utils/formulas';
 import { Grid } from '@mui/material';
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { updateAveragePERatio } from '../features/company/company';
 
 function FundamentalyAnalysisDashboard() {
     const sampleCompanies: Company[] = [
@@ -72,6 +73,9 @@ function FundamentalyAnalysisDashboard() {
     
       const companiesWithPERatios = getCompanyPERatios(sampleCompanies);
       const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
+      const averageSectorPE = useAppSelector((state) => state.companyState.averagePERatio);
+      const dispatch = useAppDispatch();
+      dispatch(updateAveragePERatio(getAverageSectorPE(companiesWithPERatios)));
     return (
         <Grid 
             container 
@@ -83,7 +87,7 @@ function FundamentalyAnalysisDashboard() {
             <Grid item xs={6}>
                 <CompaniesTable
                 title="FINANCIALS"
-                subtitle={`Average Sector PE: ${getAverageSectorPE((companiesWithPERatios)).toFixed(2)}`}
+                subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={listOfCompaniesHeaders} 
                 data={companiesWithPERatios}
                 />
@@ -91,9 +95,9 @@ function FundamentalyAnalysisDashboard() {
             <Grid xs={5}>
                 <FairValueTable
                 title={"Fair Value Table"}
-                subtitle={`Average Sector PE: ${getAverageSectorPE(companiesWithPERatios).toFixed(2)}`}
+                subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
-                data={[]}
+                data={getCompanyFairValues(selectedCompanies)}
                 />
             </Grid>
             {selectedCompanies.length >= 3 && 

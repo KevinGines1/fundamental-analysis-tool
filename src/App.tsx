@@ -9,7 +9,6 @@ function App() {
   
   return (
 
-    // TODO: generate FairValue table
     // TODO: make companies in CompaniesTable editable (click row and then edit)
   
     <div className="App">
