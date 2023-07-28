@@ -13,7 +13,7 @@ import Company from '../types/company';
 
 import { getAverageSectorPE } from '../utils/formulas';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { addToSelectedCompanies, removeFromSelectedCompanies } from '../features/company/company';
+import { addToSelectedCompanies, removeFromSelectedCompanies, updateCompany } from '../features/company/company';
 import UpdateCompanyModal from './UpdateCompanyModal';
 
 function getRowColor(row: Company, averageSectorPE: number) {
@@ -29,19 +29,24 @@ function getRowColor(row: Company, averageSectorPE: number) {
 }
 
 function CompaniesTable(props: CompaniesTableProps) {
-    const {title, subtitle, headers, data} = props;
-    const averageSectorPE = getAverageSectorPE(data);
+    const {title, subtitle, headers} = props;
+
+    const companies = useAppSelector((state) => state.companyState.companies);
     const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
     const dispatch = useAppDispatch();
+
+    const averageSectorPE = getAverageSectorPE(companies);
+    
     const numSelected = selectedCompanies.length;
+
     const [showModal, setShowModal] = useState(false);
-    const [companyToEdit, setCompanyToEdit] = useState<Company>();
+    const [companyToEdit, setCompanyToEdit] = useState<Company>({} as Company);
 
     const handleOnCheck = (company: Company, companySelected: boolean) => {
         if(numSelected === 5 && !companySelected) return;
 
         if(companySelected) {
-            dispatch(removeFromSelectedCompanies(company))
+            dispatch(removeFromSelectedCompanies(company));
             return;
         } 
         dispatch(addToSelectedCompanies(company));
@@ -51,7 +56,11 @@ function CompaniesTable(props: CompaniesTableProps) {
         setCompanyToEdit(company);
         setShowModal(true);
     }
-    
+
+    const handleUpdateCompanySubmit = (updatedCompany: Company) => {
+        dispatch(updateCompany(updatedCompany));
+    };
+    console.log(companies)
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>
@@ -77,7 +86,7 @@ function CompaniesTable(props: CompaniesTableProps) {
                     </TableHead>
                     <TableBody>
                         {
-                            data.map((row: Company)=>{
+                            companies.map((row: Company)=>{
                                 const rowColor = getRowColor(row, averageSectorPE);
                                 const companySelected = selectedCompanies.some((c: Company) => c.name === row.name);
                                 return(
@@ -116,11 +125,14 @@ function CompaniesTable(props: CompaniesTableProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <UpdateCompanyModal
+            { showModal && <UpdateCompanyModal
                 showModal={showModal}
                 companyToEdit={companyToEdit}
                 onClose={()=>setShowModal(false)}
-            />
+                onUpdateSubmit={(updatedCompany: Company) => {
+                    handleUpdateCompanySubmit(updatedCompany);
+                }}
+            />}
         </>
         );
 }

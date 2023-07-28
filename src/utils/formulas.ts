@@ -55,12 +55,12 @@ const getFormulaParameters = (ratioName: string, company: Company): FormulaParam
             }
         case DEBT_RATIO:
             return {
-                op1: company.totalDebt ?? 0,
+                op1: company.totalLiabilities ?? 0,
                 op2: company.totalAssets ?? 1
             }
         case DEBT_TO_EQUITY_RATIO:
             return {
-                op1: company.totalDebt ?? 0,
+                op1: company.totalLiabilities ?? 0,
                 op2: company.totalShareholdersEquity ?? 1
             }
         case INTEREST_COVERAGE:

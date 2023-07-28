@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CompaniesTable from '../components/CompaniesTable';
 import RatiosTable from '../components/RatiosTable';
 import FairValueTable from '../components/FairValueTable';
@@ -8,7 +8,7 @@ import { listOfCompaniesHeaders } from '../utils/constants';
 import { getCompanyPERatios, getAverageSectorPE, getCompanyFairValues } from '../utils/formulas';
 import { Grid } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { updateAveragePERatio } from '../features/company/company';
+import { addCompanies, updateAveragePERatio } from '../features/company/company';
 
 function FundamentalyAnalysisDashboard() {
     const sampleCompanies: Company[] = [
@@ -72,10 +72,14 @@ function FundamentalyAnalysisDashboard() {
       ;
     
       const companiesWithPERatios = getCompanyPERatios(sampleCompanies);
+      const dispatch = useAppDispatch();
+
+      dispatch(addCompanies(companiesWithPERatios));
       const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
       const averageSectorPE = useAppSelector((state) => state.companyState.averagePERatio);
-      const dispatch = useAppDispatch();
       dispatch(updateAveragePERatio(getAverageSectorPE(companiesWithPERatios)));
+      
+      
     return (
         <Grid 
             container 
@@ -89,20 +93,19 @@ function FundamentalyAnalysisDashboard() {
                 title="FINANCIALS"
                 subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={listOfCompaniesHeaders} 
-                data={companiesWithPERatios}
                 />
             </Grid>
             <Grid xs={5}>
-                <FairValueTable
+                {/* <FairValueTable
                 title={"Fair Value Table"}
                 subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
                 data={getCompanyFairValues(selectedCompanies)}
-                />
+                /> */}
             </Grid>
             {selectedCompanies.length >= 3 && 
               <Grid xs={12}>
-                <RatiosTable companies={getCompanyPERatios(selectedCompanies)}/>
+                <RatiosTable />
               </Grid>
             }
     </Grid>

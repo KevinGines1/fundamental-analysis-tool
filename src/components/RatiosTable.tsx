@@ -17,6 +17,7 @@ import RatiosTableProps from '../types/RatiosTableProps';
 import RatioClassication from '../enums/RatioClassification';
 import Company from '../types/company';
 import { calculateRatio } from '../utils/formulas';
+import { useAppSelector } from '../app/hooks';
 
 const generateRatioRow = (row: Ratio, companies: Company[]) => {
     return (
@@ -37,8 +38,8 @@ const generateRatioRow = (row: Ratio, companies: Company[]) => {
     );
 }
 
-function RatiosTable(props: RatiosTableProps) {
-    const { companies } = props;
+function RatiosTable() {
+    const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
     const groupedRatios: Object = groupBy(ratios, "classification")
     const liquidityRatios: Ratio[] = get(groupedRatios, RatioClassication.LIQUIDITY_RATIO, []);
     const financialLeverageRatios: Ratio[] = get(groupedRatios, RatioClassication.FINANCIAL_LEVERAGE, []);
@@ -52,7 +53,7 @@ function RatiosTable(props: RatiosTableProps) {
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
-                            {companies.map((company, index) => {
+                            {selectedCompanies.map((company, index) => {
                                 return(
                                     <TableCell key={`${index}-${company.stockCode}`}>{company.stockCode}</TableCell>
                                 );
@@ -67,7 +68,7 @@ function RatiosTable(props: RatiosTableProps) {
                         {
                             liquidityRatios.map(
                                 r => {
-                                    return generateRatioRow(r, companies);
+                                    return generateRatioRow(r, selectedCompanies);
                                 }
                             )
                         }
@@ -77,7 +78,7 @@ function RatiosTable(props: RatiosTableProps) {
                         {
                             financialLeverageRatios.map(
                                 r => {
-                                    return generateRatioRow(r, companies);
+                                    return generateRatioRow(r, selectedCompanies);
                                 }
                             )
                         }
@@ -87,7 +88,7 @@ function RatiosTable(props: RatiosTableProps) {
                         {
                             profitabilityRatios.map(
                                 r => {
-                                    return generateRatioRow(r, companies);
+                                    return generateRatioRow(r, selectedCompanies);
                                 }
                             )
                         }

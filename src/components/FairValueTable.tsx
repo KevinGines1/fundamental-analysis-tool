@@ -13,7 +13,8 @@ import Company from '../types/company';
 
 
 function FairValueTable(props: CompaniesTableProps) {
-    const {title, subtitle, headers, data} = props;
+    const {title, subtitle, headers} = props;
+    const data: Company[] = [];
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>

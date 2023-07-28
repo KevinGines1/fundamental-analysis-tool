@@ -26,11 +26,33 @@ export const companySlice = createSlice({
         },
         updateAveragePERatio: (state, action: PayloadAction<number>) => {
             state.averagePERatio = action.payload;
+        },
+        updateCompany: (state, action: PayloadAction<Company>) => {
+            const currentCompanies = [...state.companies];
+            const companyToUpdate = action.payload;
+            const index = currentCompanies.findIndex(c => c.name === companyToUpdate.name);
+            state.companies = state.companies.map((c, idx) => {
+                if (idx === index) {
+                    return {
+                        ...companyToUpdate,
+                    };
+                }
+                return c;
+            })
+        },
+        addCompanies: (state, action:PayloadAction<Company[]>) => {
+            state.companies = [...action.payload];
         }
     }
 });
 
-export const { addToSelectedCompanies, removeFromSelectedCompanies, updateAveragePERatio } = companySlice.actions;
+export const { 
+    addToSelectedCompanies,
+    removeFromSelectedCompanies,
+    updateAveragePERatio,
+    updateCompany,
+    addCompanies
+} = companySlice.actions;
 
 export const selectCompanies = (state: RootState) => state.companyState;
 

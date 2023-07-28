@@ -16,12 +16,12 @@ export interface Company {
     totalAssets?: number;
     totalLiabilities?: number;
 
-    totalDebt?: number;
     totalShareholdersEquity?: number;
     ebitda?: number;
     interestExpense?: number;
 
     grossProfit?: number;
+    grossExpenses?: number;
     grossRevenues?: number;
     netIncome?: number;
     totalEquity?: number;
