@@ -29,10 +29,21 @@ export const companySlice = createSlice({
         },
         updateCompany: (state, action: PayloadAction<Company>) => {
             const currentCompanies = [...state.companies];
+            const selectedCompanies = [...state.selectedCompanies];
             const companyToUpdate = action.payload;
-            const index = currentCompanies.findIndex(c => c.name === companyToUpdate.name);
+            const currentCompaniesIndex = currentCompanies.findIndex(c => c.name === companyToUpdate.name);
+            const selectedCompaniesIndex = selectedCompanies.findIndex(c => c.name === companyToUpdate.name)
             state.companies = state.companies.map((c, idx) => {
-                if (idx === index) {
+                if (idx === currentCompaniesIndex) {
+                    return {
+                        ...companyToUpdate,
+                    };
+                }
+                return c;
+            })
+
+            state.selectedCompanies = state.selectedCompanies.map((c, idx) => {
+                if (idx === selectedCompaniesIndex) {
                     return {
                         ...companyToUpdate,
                     };

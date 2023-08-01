@@ -10,7 +10,6 @@ function App() {
   return (
 
     // TODO: make companies in CompaniesTable editable (click row and then edit)
-    // TODO: the updated company is not reflected in state.selectedCompanies!!
     // TODO: upload company info from excel sheet feature
   
     <div className="App">
