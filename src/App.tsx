@@ -9,8 +9,10 @@ function App() {
   
   return (
 
-    // TODO: make companies in CompaniesTable editable (click row and then edit)
+    // TODO: averageSectorPE should be retrieved in each component
+    // TODO: ^ and not passed down fr parent component
     // TODO: upload company info from excel sheet feature
+    // TODO: clean up ratios table -- NaN are showing
   
     <div className="App">
       <AppBar position={"static"}>

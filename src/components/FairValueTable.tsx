@@ -10,11 +10,14 @@ import { Typography } from '@mui/material';
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
+import { useAppSelector } from '../app/hooks';
+import { getCompanyFairValues } from '../utils/formulas';
 
 
 function FairValueTable(props: CompaniesTableProps) {
     const {title, subtitle, headers} = props;
-    const data: Company[] = [];
+    const selectedCompanies: Company[] = useAppSelector((state) => state.companyState.selectedCompanies);
+    const data = getCompanyFairValues(selectedCompanies);
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>

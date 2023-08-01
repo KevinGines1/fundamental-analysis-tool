@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CompaniesTable from '../components/CompaniesTable';
 import RatiosTable from '../components/RatiosTable';
 import FairValueTable from '../components/FairValueTable';
@@ -96,12 +96,11 @@ function FundamentalyAnalysisDashboard() {
                 />
             </Grid>
             <Grid xs={5}>
-                {/* <FairValueTable
+                <FairValueTable
                 title={"Fair Value Table"}
                 subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
-                data={getCompanyFairValues(selectedCompanies)}
-                /> */}
+                />
             </Grid>
             {selectedCompanies.length >= 3 && 
               <Grid xs={12}>

@@ -13,7 +13,6 @@ import Ratio from '../objects/Ratio';
 import ratios from '../utils/ratios';
 
 
-import RatiosTableProps from '../types/RatiosTableProps';
 import RatioClassication from '../enums/RatioClassification';
 import Company from '../types/company';
 import { calculateRatio } from '../utils/formulas';
