@@ -3,7 +3,7 @@ import type { RootState } from "../../app/store";
 import Company from "../../types/company";
 
 interface CompanyState {
-    companies: Company[]; // list of all the companies
+    companies: Company[]; // list of all the companies in a sector
     selectedCompanies: Company[]; // list of companies selected for analysis
     averagePERatio: number; // the average PE ratio of the sector
 }
@@ -29,10 +29,8 @@ export const companySlice = createSlice({
         },
         updateCompany: (state, action: PayloadAction<Company>) => {
             const currentCompanies = [...state.companies];
-            const selectedCompanies = [...state.selectedCompanies];
             const companyToUpdate = action.payload;
             const currentCompaniesIndex = currentCompanies.findIndex(c => c.name === companyToUpdate.name);
-            const selectedCompaniesIndex = selectedCompanies.findIndex(c => c.name === companyToUpdate.name)
             state.companies = state.companies.map((c, idx) => {
                 if (idx === currentCompaniesIndex) {
                     return {
@@ -41,7 +39,12 @@ export const companySlice = createSlice({
                 }
                 return c;
             })
-
+        },
+        updateSelectedCompanies: (state, action: PayloadAction<Company>) => {
+            const currentSelectedCompanies = [...state.selectedCompanies];
+            const companyToUpdate = action.payload;
+            console.log("TEST: " + action.type);
+            const selectedCompaniesIndex = currentSelectedCompanies.findIndex(c => c.name === companyToUpdate.name);
             state.selectedCompanies = state.selectedCompanies.map((c, idx) => {
                 if (idx === selectedCompaniesIndex) {
                     return {
@@ -49,7 +52,8 @@ export const companySlice = createSlice({
                     };
                 }
                 return c;
-            })
+            });
+
         },
         addCompanies: (state, action:PayloadAction<Company[]>) => {
             state.companies = [...action.payload];
@@ -62,7 +66,8 @@ export const {
     removeFromSelectedCompanies,
     updateAveragePERatio,
     updateCompany,
-    addCompanies
+    addCompanies,
+    updateSelectedCompanies
 } = companySlice.actions;
 
 export const selectCompanies = (state: RootState) => state.companyState;

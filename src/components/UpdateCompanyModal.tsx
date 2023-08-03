@@ -180,7 +180,6 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                                 interestExpense
                             }
                             onUpdateSubmit(updatedCompany);
-                            console.log('here ' + updatedCompany.stockPrice);
                             onClose();
                         }}>
                         Update

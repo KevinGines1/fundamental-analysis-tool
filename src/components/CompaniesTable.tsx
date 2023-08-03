@@ -13,7 +13,7 @@ import Company from '../types/company';
 
 import { getAverageSectorPE } from '../utils/formulas';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { addToSelectedCompanies, removeFromSelectedCompanies, updateCompany } from '../features/company/company';
+import { addToSelectedCompanies, removeFromSelectedCompanies, updateCompany, updateSelectedCompanies } from '../features/company/company';
 import UpdateCompanyModal from './UpdateCompanyModal';
 
 function getRowColor(row: Company, averageSectorPE: number) {
@@ -36,7 +36,6 @@ function CompaniesTable(props: CompaniesTableProps) {
     const dispatch = useAppDispatch();
 
     const averageSectorPE = getAverageSectorPE(companies);
-    
     const numSelected = selectedCompanies.length;
 
     const [showModal, setShowModal] = useState(false);
@@ -59,8 +58,9 @@ function CompaniesTable(props: CompaniesTableProps) {
 
     const handleUpdateCompanySubmit = (updatedCompany: Company) => {
         dispatch(updateCompany(updatedCompany));
+        dispatch(updateSelectedCompanies(updatedCompany));
     };
-    console.log(companies)
+    
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>
