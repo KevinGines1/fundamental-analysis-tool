@@ -16,7 +16,7 @@ function FundamentalyAnalysisDashboard() {
       dispatch(addCompanies(companiesWithPERatios));
       const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
       const averageSectorPE = useAppSelector((state) => state.companyState.averagePERatio);
-      dispatch(updateAveragePERatio(getAverageSectorPE(companiesWithPERatios)));
+      // dispatch(updateAveragePERatio(getAverageSectorPE(companiesWithPERatios)));
       
       
     return (

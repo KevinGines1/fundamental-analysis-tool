@@ -6,25 +6,25 @@ export interface Company {
     stockPrice: number;
     earningsPerShareBasic: number;
     sector: Sector;
-    PERatio?: number | string;
-    fairValue?: number;
+    PERatio?: number | string; // derived value
+    fairValue?: number; // derived value
 
-    currentAssets?: number;
-    currentLiabilities?: number;
+    currentAssets: number;
+    currentLiabilities: number;
     cash?: number;
-    accountsReceivable?: number;
-    totalAssets?: number;
-    totalLiabilities?: number;
+    accountsReceivable: number;
+    totalAssets: number;
+    totalLiabilities: number;
 
-    totalShareholdersEquity?: number;
+    totalShareholdersEquity: number;
     ebitda?: number;
     interestExpense?: number;
 
-    grossProfit?: number;
-    grossExpenses?: number;
-    grossRevenues?: number;
+    grossProfit: number; // derived value
+    grossExpenses: number;
+    grossRevenues: number;
     netIncome?: number;
-    totalEquity?: number;
+    totalEquity?: number; // todo to be removed?
 }
 
 export default Company;
