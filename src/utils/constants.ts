@@ -7,6 +7,13 @@ export const listOfCompaniesHeaders: string[] = [
     "P/E"
 ];
 
+export const aboutText = "Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided.";
+
+export const devText = "Hi, I am Kevin A. Gines. I am a Software Engineer, bookworm, gym rat, and a stock market value investor. I built this app because I wanted to perform my own quantitative analysis when selecting a stock to invest in.";
+
+export const githubProfile = "https://github.com/KevinGines1";
+export const linkedInProfile = "https://www.linkedin.com/in/kevin-gines-a29382191/"
+
 interface FieldType {
     type: String // input / checkbox / select
 }

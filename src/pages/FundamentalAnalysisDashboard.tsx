@@ -19,7 +19,7 @@ function FundamentalyAnalysisDashboard() {
             justifyContent={"center"}
             alignItems={"baseline"}
         >
-            <Grid item xs={6}>
+            <Grid item xs={selectedCompanies.length >= 3 ? 6 : 7}>
                 <CompaniesTable
                 title={"Companies List"}
                 headers={listOfCompaniesHeaders} 
