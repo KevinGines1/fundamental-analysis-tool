@@ -4,10 +4,9 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Alert, Box, Button, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, Checkbox, Tooltip, Typography } from '@mui/material';
+import "./table.css";
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -75,8 +74,9 @@ function CompaniesTable(props: CompaniesTableProps) {
     
     return (
         <>
-            <Typography variant="h4" component="div">{`${companies[0]?.sector}` || title}</Typography>
-            <Typography variant="h4" component="div">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
+            <Typography variant="h4" component="div" className="tableLabel">
+                {`${companies[0]?.sector || title}`}</Typography>
+            <Typography variant="h4" className="tableSubtext">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
             <Alert severity={"info"}>Select up to 5 companies to analyze.</Alert>
             <Box sx={{display: "flex", justifyContent:"flex-end", width:"100%", mt: 1}}>
                 <Button 
@@ -88,64 +88,65 @@ function CompaniesTable(props: CompaniesTableProps) {
                 handleFileSubmit(data, file);
             }} fields={companySpreadsheetFields} />
             <br/>
-            <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+            <TableContainer component={Card} sx={{ padding: 2 }} className={"tableContainer"}>
                 <Table 
                     sx={{minWidth: 650}} 
                     size="small"
                     stickyHeader
                 >
-                    <TableHead>
-                        <TableRow>
-                            {
-                                headers.map((header, index)=>{
-                                    return(
-                                        <TableCell key={index}>{header}</TableCell>
-                                    );
-                                })
-                            }
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+                <TableBody>
+                    <TableRow>
                         {
-                            companies.map((row: Company)=>{
-                                const rowColor = getRowColor(row, averageSectorPE);
-                                const companySelected = selectedCompanies.some((c: Company) => c.name === row.name);
+                            headers.map((header, index)=>{
                                 return(
-                                    <TableRow 
-                                        key={row.stockCode} 
-                                        sx={{"backgroundColor": rowColor}}
-                                        hover
-                                    >
-                                        <TableCell size={"small"} padding={"checkbox"}>
-                                            <Checkbox checked={companySelected} onClick={() => {handleOnCheck(row, companySelected)}}/>
-                                        </TableCell>
-                                        <TableCell size={"small"}>
-                                            <Tooltip
-                                                title={"Click to update company info & data"}
-                                                placement={"right-start"}
-                                            >
-                                                <Button 
-                                                    variant={"text"}
-                                                    sx={{color: "black"}}
-                                                    onClick={() => { 
-                                                        handleButtonClick(row);
-                                                    }}
-                                                >
-                                                    {row.name}
-                                                </Button>
-                                            </Tooltip>
-                                        </TableCell>
-                                        <TableCell size={"small"}>{row.stockCode}</TableCell>
-                                        <TableCell size={"small"}>{row.stockPrice.toFixed(2)}</TableCell>
-                                        <TableCell size={"small"}>{row.earningsPerShareBasic?.toFixed(2) || 0.0}</TableCell>
-                                        <TableCell size={"small"}>{Number(row.PERatio)?.toFixed(2) || 0.0}</TableCell>
-                                    </TableRow>
+                                    <TableCell key={index}>
+                                        <Typography className={"tableHeader"}>{header}</Typography>
+                                    </TableCell>
                                 );
                             })
                         }
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                    </TableRow>
+                    {
+                        companies.map((row: Company)=>{
+                            const rowColor = getRowColor(row, averageSectorPE);
+                            const companySelected = selectedCompanies.some((c: Company) => c.name === row.name);
+                            return(
+                                <TableRow 
+                                    key={row.stockCode}
+                                    hover
+                                >
+                                    <TableCell size={"small"} padding={"checkbox"}>
+                                        <Checkbox checked={companySelected} onClick={() => {handleOnCheck(row, companySelected)}}/>
+                                    </TableCell>
+                                    <TableCell size={"small"}>
+                                        <Tooltip
+                                            title={"Click to update company info & data"}
+                                            placement={"right-start"}
+                                        >
+                                            <Button 
+                                                variant={"text"}
+                                                sx={{color: "white"}}
+                                                onClick={() => { 
+                                                    handleButtonClick(row);
+                                                }}
+                                            >
+                                                <Typography className="tableCell">
+                                                {row.name}
+                                                </Typography>
+                                            </Button>
+                                        </Tooltip>
+                                    </TableCell>
+                                    <TableCell size={"small"}><Typography className={"tableCell"}>{row.stockCode}</Typography></TableCell>
+                                    <TableCell size={"small"}><Typography className={"tableCell"}>{row.stockPrice.toFixed(2)}</Typography></TableCell>
+                                    <TableCell size={"small"}><Typography className={"tableCell"}>{row.earningsPerShareBasic?.toFixed(2) || 0.0}</Typography></TableCell>
+                                    <TableCell size={"small"}><Typography sx={{color: rowColor, fontWeight: "bold"}}>{Number(row.PERatio)?.toFixed(2) || 0.0}</Typography></TableCell>
+                                </TableRow>
+                            );
+                        })
+                    }
+                </TableBody>
+            </Table>
+        </TableContainer>
             { showModal && <UpdateCompanyModal
                 showModal={showModal}
                 companyToEdit={companyToEdit}

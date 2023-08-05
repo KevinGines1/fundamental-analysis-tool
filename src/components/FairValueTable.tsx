@@ -3,15 +3,14 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { TextField, Typography } from '@mui/material';
+import { Card, TextField, Typography } from '@mui/material';
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
 import { useAppSelector } from '../app/hooks';
 import { getCompanyFairValues } from '../utils/formulas';
+import "./table.css";
 
 
 function FairValueTable(props: CompaniesTableProps) {
@@ -20,46 +19,55 @@ function FairValueTable(props: CompaniesTableProps) {
     const averageSectorPE: number = useAppSelector((state) => state.companyState.averagePERatio);
     const data = getCompanyFairValues(selectedCompanies);
     return (
-        <>
-            <Typography variant="h4" component="div">{title}</Typography>
-            <Typography variant="h4" component="div">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
-            <TableContainer component={Paper}>
+       <>
+        <Typography variant="h4" component="div" className={"tableLabel"}>{title}</Typography>
+            <TableContainer className={"tableContainer"} component={Card} sx={{padding: 2}}>
                 <Table sx={{minWidth: 650}} size="small">
-                    <TableHead>
+                    <TableBody>
                         <TableRow>
                             {
                                 headers.map(header=>{
                                     return(
-                                        <TableCell key={header}>{header}</TableCell>
+                                        <TableCell key={header}><Typography className={"tableHeader"}>{header}</Typography></TableCell>
                                     );
                                 })
                             }
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
                         {
                             data.map((row: Company)=>{
                                 return(
                                     <TableRow key={`${row.name}-${row.stockCode}`}>
-                                        <TableCell>{row.stockCode}</TableCell>
-                                        <TableCell>{row.stockPrice.toFixed(2)}</TableCell>
-                                        <TableCell>{row.earningsPerShareBasic.toFixed(2)}</TableCell>
-                                        <TableCell>{row.fairValue?.toFixed(2)}</TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.stockCode}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.stockPrice.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.earningsPerShareBasic.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.fairValue?.toFixed(2)}</Typography></TableCell>
                                     </TableRow>
                                 );
                             })
                         }
+                        <TableRow>
+                                        <TableCell rowSpan={2}/>
+                                        <TableCell className={"tableCell"} colSpan={2} align={"right"}><Typography className="tableCell">Average Sector P/E Ratio</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell">{averageSectorPE.toFixed(2)}</Typography></TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
             <TextField
                 placeholder={"Place your notes here..."}
-                sx={{mt: 2, width: "100%", height: "100%"}}
+                fullWidth
+                sx={{mt: 2, heignt: "100%"}}
                 multiline
                 rows={5}
-                variant={"filled"}
+                variant={"outlined"}
+                InputProps={{
+                    sx: {
+                        background: "linear-gradient(102.27deg, #6F59E6 0%, #4F1797 100%);",
+                        color: "white",
+                    }
+                }}
             />
-        </>
+       </>
         );
 }
 

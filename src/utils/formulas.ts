@@ -91,7 +91,7 @@ const getFormulaParameters = (ratioName: string, company: Company): FormulaParam
         case RETURN_ON_EQUITY:
             return {
                 op1: company.netIncome ?? 0,
-                op2: company.totalEquity ?? 1
+                op2: company.totalShareholdersEquity ?? 1
             }
         case PRICE_EARNINGS_RATIO:
             return {

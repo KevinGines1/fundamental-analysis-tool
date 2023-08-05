@@ -24,7 +24,6 @@ export interface Company {
     grossExpenses: number;
     grossRevenues: number;
     netIncome?: number;
-    totalEquity?: number; // todo to be removed?
 }
 
 export default Company;

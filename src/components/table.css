@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:ital,wght@0,300;0,400;1,400&display=swap');
+
+.appName {
+    margin-top: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+}
+.tableLabel, .tableSubtext, .tableCell {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tableHeader {
+    font-weight: bolder;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tableContainer {
+    max-height: 440;
+    background: linear-gradient(102.27deg, #6F59E6 0%, #4F1797 100%);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.tableCell {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tableCell-underValued {
+    color: green;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tableCell-underValued {
+    color: red;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif;
+}

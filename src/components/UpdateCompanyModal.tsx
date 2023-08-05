@@ -31,7 +31,6 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
     const [currentLiabilities, setCurrentLiabilities] = useState(companyToEdit?.currentLiabilities || 0);
     const [totalLiabilities, setTotalLiabilities] = useState(companyToEdit?.totalLiabilities || 0);
     const [totalShareholdersEquity, setTotalShareholdersEquity] = useState(companyToEdit?.totalShareholdersEquity || 0);
-    const [totalEquity, setTotalEquity] = useState(companyToEdit?.totalEquity || 0);
     const [grossRevenues, setGrossRevenues] = useState(companyToEdit?.grossRevenues || 0);
     const [grossExpenses, setGrossExpenses] = useState(companyToEdit?.grossExpenses || 0);
     const [grossProfit, setGrossProfit] = useState(companyToEdit?.grossProfit || 0);
@@ -94,11 +93,6 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                         sx={{...textFieldMargins}} required label="Total Shareholders' Equity" variant="outlined"
                         value={totalShareholdersEquity}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalShareholdersEquity(parseFloat(e.target.value))}
-                    />
-                    <TextField 
-                        sx={{...textFieldMargins}} required label="Total Equity" variant="outlined"
-                        value={totalEquity}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalEquity(parseFloat(e.target.value))}
                     />
                     <Divider textAlign="left">
                         <Typography variant={"h6"}>Income Statement</Typography>
@@ -168,7 +162,6 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                                 currentLiabilities,
                                 totalLiabilities,
                                 totalShareholdersEquity,
-                                totalEquity,
                                 grossRevenues,
                                 grossExpenses,
                                 grossProfit,

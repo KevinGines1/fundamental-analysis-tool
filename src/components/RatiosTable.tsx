@@ -3,11 +3,10 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import { groupBy, get } from 'lodash';
+import "./table.css";
 
 import Ratio from '../objects/Ratio';
 import ratios from '../utils/ratios';
@@ -21,18 +20,18 @@ import { useAppSelector } from '../app/hooks';
 const generateRatioRow = (row: Ratio, companies: Company[]) => {
     return (
         <TableRow key={row.name}>
-            <TableCell colSpan={2}>{row.name}</TableCell>
+            <TableCell colSpan={2}><Typography className="tableCell">{row.name}</Typography></TableCell>
             {companies.map((company, index) => {
                 return (
                     <TableCell 
                         key={`${index}-${row.name}-${company.name}`}
                         size={"small"}
                     >
-                        {calculateRatio(row.name, row.formula, company).toFixed(2)}
+                        <Typography className="tableCell">{calculateRatio(row.name, row.formula, company).toFixed(2)}</Typography>
                     </TableCell>
                 )
             })}
-            <TableCell>{row.guide}</TableCell>
+            <TableCell><Typography className="tableCell">{row.guide}</Typography></TableCell>
         </TableRow>
     );
 }
@@ -45,24 +44,25 @@ function RatiosTable() {
     const profitabilityRatios: Ratio[] = get(groupedRatios, RatioClassication.PROFITABILITY, []);
     return(
         <>
-            <Typography variant="h4">Ratios</Typography>
-            <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+            <Typography variant="h4" className='tableLabel'>Ratios</Typography>
+            <TableContainer component={Card} className={"tableContainer"} sx={{ padding: 2, mb: 10 }}>
                 <Table sx={{minWidth: 650}} size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            {selectedCompanies.map((company, index) => {
-                                return(
-                                    <TableCell key={`${index}-${company.stockCode}`}>{company.stockCode}</TableCell>
-                                );
-                            })}
-                            <TableCell>Guide</TableCell>
-                        </TableRow>
-                    </TableHead>
                     <TableBody>
                         <TableRow>
-                            <TableCell align={"center"} colSpan={8}>{RatioClassication.LIQUIDITY_RATIO}</TableCell>
+                            <TableCell colSpan={2}></TableCell>
+                            {selectedCompanies.map((company, index) => {
+                                return(
+                                    <TableCell key={`${index}-${company.stockCode}`}><Typography className="tableHeader">{company.stockCode}</Typography></TableCell>
+                                );
+                            })}
+                            <TableCell><Typography className="tableHeader">Guide</Typography></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="tableHeader" align={"center"} colSpan={8}>
+                                <Typography className="tableHeader">
+                                    {RatioClassication.LIQUIDITY_RATIO}
+                                </Typography>
+                            </TableCell>
                         </TableRow>
                         {
                             liquidityRatios.map(
@@ -72,7 +72,11 @@ function RatiosTable() {
                             )
                         }
                         <TableRow>
-                            <TableCell align={"center"} colSpan={8}>{RatioClassication.FINANCIAL_LEVERAGE}</TableCell>
+                            <TableCell align={"center"} colSpan={8}>
+                                <Typography className="tableHeader">
+                                    {RatioClassication.FINANCIAL_LEVERAGE}
+                                </Typography>
+                            </TableCell>
                         </TableRow>
                         {
                             financialLeverageRatios.map(
@@ -82,7 +86,11 @@ function RatiosTable() {
                             )
                         }
                         <TableRow>
-                            <TableCell align={"center"} colSpan={8}>{RatioClassication.PROFITABILITY}</TableCell>
+                            <TableCell  align={"center"} colSpan={8}>
+                                <Typography className="tableHeader">
+                                    {RatioClassication.PROFITABILITY}
+                                </Typography>
+                            </TableCell>
                         </TableRow>
                         {
                             profitabilityRatios.map(

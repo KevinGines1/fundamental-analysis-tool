@@ -34,7 +34,7 @@ function FundamentalyAnalysisDashboard() {
             }
             </Grid>
             {selectedCompanies.length >= 3 && 
-              <Grid item xs={12}>
+              <Grid item xs={8}>
                 <RatiosTable />
               </Grid>
             }
