@@ -21,7 +21,7 @@ function FundamentalyAnalysisDashboard() {
         >
             <Grid item xs={6}>
                 <CompaniesTable
-                title="FINANCIALS"
+                title={"Companies List"}
                 headers={listOfCompaniesHeaders} 
                 />
             </Grid>

@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -52,6 +52,13 @@ function FairValueTable(props: CompaniesTableProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TextField
+                placeholder={"Place your notes here..."}
+                sx={{mt: 2, width: "100%", height: "100%"}}
+                multiline
+                rows={5}
+                variant={"filled"}
+            />
         </>
         );
 }

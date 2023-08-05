@@ -33,7 +33,7 @@ function getRowColor(row: Company, averageSectorPE: number) {
 }
 
 function CompaniesTable(props: CompaniesTableProps) {
-    const {title, headers} = props;
+    const { title, headers } = props;
 
     const companies: Company[] = useAppSelector((state) => state.companyState.companies);
     const selectedCompanies: Company[] = useAppSelector((state) => state.companyState.selectedCompanies);
@@ -75,7 +75,7 @@ function CompaniesTable(props: CompaniesTableProps) {
     
     return (
         <>
-            <Typography variant="h4" component="div">{title}</Typography>
+            <Typography variant="h4" component="div">{`${companies[0]?.sector}` || title}</Typography>
             <Typography variant="h4" component="div">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
             <Alert severity={"info"}>Select up to 5 companies to analyze.</Alert>
             <Box sx={{display: "flex", justifyContent:"flex-end", width:"100%", mt: 1}}>

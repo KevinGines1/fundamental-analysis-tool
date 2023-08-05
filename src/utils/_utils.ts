@@ -9,6 +9,7 @@ export const generateCompany = (data: Data<string>) : Company => {
     const grossRevenues: number = data.grossRevenues ? parseFloat(data.grossRevenues.toString().trim()) : 0.0;
     const currentAssets: number = data.currentAssets ? parseFloat(data.currentAssets.toString().trim()) : 0.0;
     const totalAssets: number = data.totalAssets ? parseFloat(data.totalAssets.toString().trim()) : 0.0;
+    const currentLiabilities: number = data.currentLiabilities ? parseFloat(data.currentLiabilities.toString().trim()) : 0.0;
     const totalLiabilities: number = data.totalLiabilities ? parseFloat(data.totalLiabilities.toString().trim()) : 0.0;
     const totalShareholdersEquity: number = data.totalShareholdersEquity ? parseFloat(data.totalShareholdersEquity.toString().trim()) : 0.0;
     const grossProfit: number = grossRevenues-grossExpenses;
@@ -22,7 +23,7 @@ export const generateCompany = (data: Data<string>) : Company => {
         PERatio,
         sector: data.sector,
         currentAssets,
-        currentLiabilities: data.currentLiabilities ? parseFloat(data.currentLiabilities.toString().trim()) : 0.0,
+        currentLiabilities,
         totalAssets,
         totalLiabilities,
         totalShareholdersEquity,
