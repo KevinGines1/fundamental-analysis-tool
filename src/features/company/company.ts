@@ -43,7 +43,6 @@ export const companySlice = createSlice({
         updateSelectedCompanies: (state, action: PayloadAction<Company>) => {
             const currentSelectedCompanies = [...state.selectedCompanies];
             const companyToUpdate = action.payload;
-            console.log("TEST: " + action.type);
             const selectedCompaniesIndex = currentSelectedCompanies.findIndex(c => c.name === companyToUpdate.name);
             state.selectedCompanies = state.selectedCompanies.map((c, idx) => {
                 if (idx === selectedCompaniesIndex) {

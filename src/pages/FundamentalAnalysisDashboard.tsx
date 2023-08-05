@@ -3,21 +3,13 @@ import CompaniesTable from '../components/CompaniesTable';
 import RatiosTable from '../components/RatiosTable';
 import FairValueTable from '../components/FairValueTable';
 import { listOfCompaniesHeaders } from '../utils/constants';
-import { getCompanyPERatios, getAverageSectorPE } from '../utils/formulas';
 import { Grid } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { addCompanies, updateAveragePERatio } from '../features/company/company';
-import { sampleCompanies } from '../utils/mock_data';
+import { 
+  useAppSelector } from '../app/hooks';
 
 function FundamentalyAnalysisDashboard() {
-      const companiesWithPERatios = getCompanyPERatios(sampleCompanies);
-      const dispatch = useAppDispatch();
 
-      dispatch(addCompanies(companiesWithPERatios));
-      const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
-      const averageSectorPE = useAppSelector((state) => state.companyState.averagePERatio);
-      // dispatch(updateAveragePERatio(getAverageSectorPE(companiesWithPERatios)));
-      
+    const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
       
     return (
         <Grid 
@@ -30,19 +22,19 @@ function FundamentalyAnalysisDashboard() {
             <Grid item xs={6}>
                 <CompaniesTable
                 title="FINANCIALS"
-                subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={listOfCompaniesHeaders} 
                 />
             </Grid>
-            <Grid xs={5}>
-                <FairValueTable
+            <Grid item xs={5}>
+            { selectedCompanies.length >= 3 && 
+              <FairValueTable
                 title={"Fair Value Table"}
-                subtitle={`Average Sector PE: ${averageSectorPE.toFixed(2)}`}
                 headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
-                />
+              />
+            }
             </Grid>
             {selectedCompanies.length >= 3 && 
-              <Grid xs={12}>
+              <Grid item xs={12}>
                 <RatiosTable />
               </Grid>
             }

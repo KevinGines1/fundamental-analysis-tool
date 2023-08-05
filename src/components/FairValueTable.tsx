@@ -15,13 +15,14 @@ import { getCompanyFairValues } from '../utils/formulas';
 
 
 function FairValueTable(props: CompaniesTableProps) {
-    const {title, subtitle, headers} = props;
+    const {title, headers} = props;
     const selectedCompanies: Company[] = useAppSelector((state) => state.companyState.selectedCompanies);
+    const averageSectorPE: number = useAppSelector((state) => state.companyState.averagePERatio);
     const data = getCompanyFairValues(selectedCompanies);
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>
-            <Typography variant="h6" component="div">{subtitle || ""}</Typography>
+            <Typography variant="h4" component="div">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} size="small">
                     <TableHead>

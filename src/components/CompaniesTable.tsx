@@ -12,10 +12,11 @@ import { Alert, Box, Button, Checkbox, Tooltip, Typography } from '@mui/material
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
 
-import { getAverageSectorPE } from '../utils/formulas';
 import { companySpreadsheetFields } from '../utils/constants';
+import { generateCompany } from '../utils/_utils';
+import { getAverageSectorPE } from '../utils/formulas';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { addCompanies, addToSelectedCompanies, removeFromSelectedCompanies, updateAveragePERatio, updateCompany, updateSelectedCompanies } from '../features/company/company';
+import { addCompanies, addToSelectedCompanies, updateAveragePERatio, removeFromSelectedCompanies, updateCompany, updateSelectedCompanies } from '../features/company/company';
 import UpdateCompanyModal from './UpdateCompanyModal';
 import { Result } from 'react-spreadsheet-import/types/types';
 
@@ -32,14 +33,14 @@ function getRowColor(row: Company, averageSectorPE: number) {
 }
 
 function CompaniesTable(props: CompaniesTableProps) {
-    const {title, subtitle, headers} = props;
+    const {title, headers} = props;
 
-    const companies = useAppSelector((state) => state.companyState.companies);
-    const selectedCompanies = useAppSelector((state) => state.companyState.selectedCompanies);
+    const companies: Company[] = useAppSelector((state) => state.companyState.companies);
+    const selectedCompanies: Company[] = useAppSelector((state) => state.companyState.selectedCompanies);
+    const averageSectorPE: number = useAppSelector((state) => state.companyState.averagePERatio);
     const dispatch = useAppDispatch();
 
-    const averageSectorPE = getAverageSectorPE(companies);
-    const numSelected = selectedCompanies.length;
+    const numSelected: number = selectedCompanies.length;
 
     const [showModal, setShowModal] = useState(false);
     const [companyToEdit, setCompanyToEdit] = useState<Company>({} as Company);
@@ -65,43 +66,17 @@ function CompaniesTable(props: CompaniesTableProps) {
         dispatch(updateSelectedCompanies(updatedCompany));
     };
 
-    const handleFileSubmit = (data: Result<string>, file: File): void => {
+    const handleFileSubmit = async (data: Result<string>, file: File): Promise<void> => {
         const { validData } = data;
-        let sum: number = 0;
-        const companies: Company[] = validData.map(d => {
-            const stockPrice = d.stockPrice ? parseFloat(d.stockPrice.toString().trim()) : 0.0;
-            const earningsPerShareBasic = d.earningsPerShareBasic ? parseFloat(d.earningsPerShareBasic.toString().trim()) : 0.0;
-            const PERatio = earningsPerShareBasic !== 0.0? stockPrice/earningsPerShareBasic: 0.0;
-            const grossExpenses: number = d.grossExpenses ? parseFloat(d.grossExpenses.toString().trim()) : 0.0;
-            const grossRevenues: number = d.grossRevenues ? parseFloat(d.grossRevenues.toString().trim()) : 0.0;
-            sum = sum + PERatio;
-            return {
-                name: d.name,
-                stockCode: d.stockCode,
-                stockPrice,
-                earningsPerShareBasic,
-                PERatio,
-                sector: d.sector,
-                currentAssets: d.currentAssets ? parseFloat(d.currentAssets.toString().trim()) : 0.0,
-                currentLiabilities: d.currentLiabilities ? parseFloat(d.currentLiabilities.toString().trim()) : 0.0,
-                totalAssets: d.totalAssets ? parseFloat(d.totalAssets.toString().trim()) : 0.0,
-                totalLiabilities: d.totalLiabilities ? parseFloat(d.totalLiabilities.toString().trim()) : 0.0,
-                totalShareholdersEquity: d.totalShareholdersEquity ? parseFloat(d.totalShareholdersEquity.toString().trim()) : 0.0,
-                grossExpenses,
-                grossRevenues,
-                grossProfit: grossRevenues-grossExpenses,
-                netIncome: grossRevenues-grossExpenses
-            } as Company;
-        })
-        console.log(companies);
-        dispatch(addCompanies(companies));
-        dispatch(updateAveragePERatio(sum/companies.length));
+        const companies: Company[] = validData.map(d => generateCompany(d))
+        await dispatch(addCompanies(companies));
+        dispatch(updateAveragePERatio(getAverageSectorPE(companies)));
     }
     
     return (
         <>
             <Typography variant="h4" component="div">{title}</Typography>
-            <Typography variant="h6" component="div">{subtitle || ""}</Typography>
+            <Typography variant="h4" component="div">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
             <Alert severity={"info"}>Select up to 5 companies to analyze.</Alert>
             <Box sx={{display: "flex", justifyContent:"flex-end", width:"100%", mt: 1}}>
                 <Button 

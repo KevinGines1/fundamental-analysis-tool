@@ -63,7 +63,7 @@ const sector: Field = {
     key: "sector",
     alternateMatches: [],
     fieldType: { type: "input" },
-    example: "COMMERCIAL",
+    example: "FINANCIALS",
     validations: [
         generateValidation("required", "Sector is required", "error")
     ]
@@ -72,7 +72,7 @@ const sector: Field = {
 const stockPrice: Field = {
     label: "Price",
     key: "stockPrice",
-    alternateMatches: [],
+    alternateMatches: ["price"],
     fieldType: { type: "input" },
     example: "0.10",
     validations: [
@@ -127,7 +127,7 @@ const totalLiabilities: Field = {
 const totalShareholdersEquity: Field = {
     label: "Total Shareholders Equity",
     key: "totalShareholdersEquity",
-    alternateMatches: [],
+    alternateMatches: ["Total Shareholders Equity"],
     fieldType: { type: "input" },
     example: "1000000",
     validations: [
@@ -171,7 +171,7 @@ const netIncome: Field = {
 const earningsPerShareBasic: Field = {
     label: "Earnings Per Share (Basic)",
     key: "earningsPerShareBasic",
-    alternateMatches: [],
+    alternateMatches: ["Earnings Per Share (Basic)"],
     fieldType: { type: "input" },
     example: "1000000",
     validations: [
