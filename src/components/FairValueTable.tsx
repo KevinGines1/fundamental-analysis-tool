@@ -21,7 +21,7 @@ function FairValueTable(props: CompaniesTableProps) {
     return (
        <>
         <Typography variant="h4" component="div" className={"tableLabel"}>{title}</Typography>
-            <TableContainer className={"tableContainer"} component={Card} sx={{padding: 2}}>
+            <TableContainer className={"tableContainer-fv"} component={Card} sx={{padding: 2}}>
                 <Table sx={{minWidth: 650}} size="small">
                     <TableBody>
                         <TableRow>
@@ -62,7 +62,7 @@ function FairValueTable(props: CompaniesTableProps) {
                 variant={"outlined"}
                 InputProps={{
                     sx: {
-                        background: "linear-gradient(102.27deg, #6F59E6 0%, #4F1797 100%);",
+                        background: "linear-gradient(102.27deg, #A453CB 0%, #8B10B6 100%);",
                         color: "white",
                     }
                 }}

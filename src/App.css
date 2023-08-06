@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:ital,wght@0,300;0,400;1,400&display=swap');
+
 .App {
   text-align: center;
-  background: rgba(14, 19, 26, 1);
   background: rgba(39, 45, 53, 1);
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
