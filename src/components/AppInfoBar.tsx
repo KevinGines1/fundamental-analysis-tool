@@ -2,7 +2,7 @@ import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
 import LeftPanel from "./LeftPanel";
 import MenuIcon from '@mui/icons-material/Menu';
-import "./table.css";
+import "../styles/table.css";
 
 function AppInfoBar() {
     const [open, setOpen] = useState(false);

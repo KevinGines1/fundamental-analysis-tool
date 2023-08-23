@@ -2,25 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Alert, Box, Button, Divider, Modal, TextField, Typography } from "@mui/material";
 import { UpdateCompanyModalProps } from "../types/UpdateCompanyModalProps";
 import Company from "../types/company";
-
-const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    height: 600,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    overflow: 'scroll'
-}
-
-const textFieldMargins = {
-    marginBlock: 2,
-    marginInline:1
-}
+import '../styles/modal.css';
+import { dividerStyle, modalStyle, textFieldMargins } from "../styles/modalStyles";
+import { primaryButtonStyle, secondaryButtonStyle } from "../styles/styles";
+import { alertStyle } from "../styles/styles";
 
 function UpdateCompanyModal(props: UpdateCompanyModalProps) {
     const { showModal, companyToEdit, onClose, onUpdateSubmit } = props;
@@ -50,14 +35,14 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
             open={showModal}
             onClose={onClose}
         >
-            <Box sx={{...modalStyle, width: 600}}>
-                <Typography variant={"h4"}>{companyToEdit?.name}</Typography>
-                <Alert severity={"info"}>Fields marked with an * are required for analysis.</Alert>
+            <Box sx={{...modalStyle}}>
+                <Typography className="modalHeader" variant={"h4"}>{companyToEdit?.name}</Typography>
+                <Alert sx={{...alertStyle}} severity={"info"} variant="filled">Fields marked with an * are required for analysis.</Alert>
                 <br/>
                 <Box>
                     
-                    <Divider textAlign="left">
-                        <Typography variant={"h6"}>Stock Data</Typography>
+                    <Divider textAlign="left" sx={{...dividerStyle}}>
+                        <Typography className="modalText" variant={"h6"}>Stock Data</Typography>
                     </Divider>
                     <TextField 
                         label="Stock Price" 
@@ -68,8 +53,8 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                         value={stockPrice}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStockPrice(parseFloat(e.target.value))}
                     />
-                    <Divider textAlign="left">
-                        <Typography variant={"h6"}>Balance Sheet</Typography>
+                    <Divider textAlign="left" sx={{...dividerStyle}}>
+                        <Typography className="modalText" variant={"h6"}>Balance Sheet</Typography>
                     </Divider>
                     <br/>
                     <TextField 
@@ -94,8 +79,8 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                         value={totalShareholdersEquity}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotalShareholdersEquity(parseFloat(e.target.value))}
                     />
-                    <Divider textAlign="left">
-                        <Typography variant={"h6"}>Income Statement</Typography>
+                    <Divider textAlign="left" sx={{...dividerStyle}}>
+                        <Typography className="modalText" variant={"h6"}>Income Statement</Typography>
                     </Divider>
                     <br/>
                     <TextField 
@@ -110,7 +95,6 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                     />
                     <TextField 
                         sx={{...textFieldMargins}} required label="Gross Profit" variant="outlined"
-                        disabled
                         value={grossProfit}
                     />
                     <TextField 
@@ -123,8 +107,8 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                         value={earningsPerShareBasic}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEarningsPerShareBasic(parseFloat(e.target.value))}
                     />
-                    <Divider textAlign="left">
-                        <Typography variant={"h6"}>Other info</Typography>
+                    <Divider textAlign="left" sx={{...dividerStyle}}>
+                        <Typography className="modalText" variant={"h6"}>Other info</Typography>
                     </Divider>
                     <br/>
                     <TextField 
@@ -152,7 +136,7 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                     sx={{width: "100%", display: "flex", flexDirection: "row-reverse"}}
                 >
                     <Button 
-                        sx={{marginInline: 1}} variant={"contained"}
+                        sx={{...primaryButtonStyle}} variant={"contained"}
                         onClick={() => {
                             const updatedCompany: Company = {
                                 ...companyToEdit,
@@ -178,9 +162,8 @@ function UpdateCompanyModal(props: UpdateCompanyModalProps) {
                         Update
                     </Button>
                     <Button 
-                        sx={{marginInline: 1}} variant={"outlined"}
+                        sx={{...secondaryButtonStyle}} variant={"outlined"}
                         onClick={() => {
-                            // resetStateValues();
                             onClose();
                         }}
                     >Cancel</Button>

@@ -6,7 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Alert, Box, Button, Card, Checkbox, Tooltip, Typography } from '@mui/material';
-import "./table.css";
+import { alertStyle, secondaryButtonStyle} from '../styles/styles';
+import "../styles/table.css";
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -82,7 +83,7 @@ function CompaniesTable(props: CompaniesTableProps) {
             <Alert 
                 severity={"info"} 
                 variant={"filled"}
-                sx={{background: "linear-gradient(102.27deg, #6F59E6 0%, #4F1797 100%);", mb: 2}}
+                sx={{...alertStyle}}
             >
                 {companies.length === 0? "Upload a spreadsheet to begin" : "Select up to 5 companies to analyze."}
             </Alert>
@@ -90,7 +91,7 @@ function CompaniesTable(props: CompaniesTableProps) {
                 <Button 
                     variant="outlined"
                     onClick={() => setUploaderOpen(true)}
-                    sx={{color: "white", borderColor: "white", fontWeight: "bold"}}
+                    sx={{...secondaryButtonStyle}}
                 >Upload spreadsheet</Button>
             </Box>
             <ReactSpreadsheetImport isOpen={uploaderOpen} onClose={() => setUploaderOpen(false)} onSubmit={(data, file) => {

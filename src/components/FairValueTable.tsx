@@ -10,8 +10,7 @@ import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
 import { useAppSelector } from '../app/hooks';
 import { getCompanyFairValues } from '../utils/formulas';
-import "./table.css";
-
+import '../styles/table.css';
 
 function FairValueTable(props: CompaniesTableProps) {
     const {title, headers} = props;

@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Card, Typography } from '@mui/material';
 import { groupBy, get } from 'lodash';
-import "./table.css";
+import "../styles/table.css";
 
 import Ratio from '../objects/Ratio';
 import ratios from '../utils/ratios';
