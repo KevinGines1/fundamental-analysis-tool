@@ -11,6 +11,8 @@ export const aboutText = "Fundamental Analysis Tool is an app that performs all 
 
 export const devText = "Hi, I am Kevin A. Gines. I am a Software Engineer, bookworm, gym rat, and a stock market value investor. I built this app because I wanted to perform my own quantitative analysis when selecting a stock to invest.";
 
+export const referencesText = "The Book of Secrets: A Fundamental Analysis Guide by Traders Den PH"
+
 export const githubProfile = "https://github.com/KevinGines1";
 export const linkedInProfile = "https://www.linkedin.com/in/kevin-gines-a29382191/"
 

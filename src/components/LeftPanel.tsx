@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import InfoIcon from '@mui/icons-material/Info';
 import CodeIcon from '@mui/icons-material/Code';
+import SourceIcon from '@mui/icons-material/Source';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { Drawer, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse, SvgIcon } from "@mui/material";
-import { aboutText, devText, githubProfile, linkedInProfile } from "../utils/constants";
+import { aboutText, devText, githubProfile, linkedInProfile, referencesText } from "../utils/constants";
 
 interface DrawerProps {
     open: boolean,
@@ -15,6 +16,7 @@ function LeftPanel(props: DrawerProps): JSX.Element {
     const [ openAbout, setOpenAbout ] = useState<boolean>(false);
     const [ openDev, setOpenDev ] = useState<boolean>(false);
     const [ openSocials, setOpenSocials ] = useState<boolean>(false);
+    const [ openReferences, setOpenReferences ] = useState<boolean>(false);
 
     const openInNewTab = (url: string): void => {
         window.open(url, "_blank", "noreferrer");
@@ -93,6 +95,20 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                             </ListItemIcon>
                             <ListItemText primary={"Linkedin"} />
                             </ListItemButton>
+                        </ListItem>
+                    </Collapse>
+                    {/* REFERENCES */}
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => setOpenReferences(!openReferences)}>
+                        <ListItemIcon>
+                            <SourceIcon sx={{color: "white"}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={"References"} />
+                        </ListItemButton>
+                    </ListItem>
+                    <Collapse in={openReferences}>
+                        <ListItem sx={{pl: 4}}>
+                            <ListItemText primary={referencesText} />
                         </ListItem>
                     </Collapse>
                 </List>
