@@ -26,7 +26,7 @@
     background: linear-gradient(102.27deg, #A453CB 0%, #8B10B6 100%);
 }
 
-.tableCell {
+.tableCell, .bodyText {
     color: white;
     font-family: 'Montserrat', sans-serif;
 }

@@ -87,7 +87,10 @@ function CompaniesTable(props: CompaniesTableProps) {
             >
                 {companies.length === 0? "Upload a spreadsheet to begin" : "Select up to 5 companies to analyze."}
             </Alert>
-            <Box sx={{display: "flex", justifyContent:"flex-end", width:"100%", mt: 1}}>
+            <Box sx={{display: "flex", justifyContent:"flex-end", alignItems: "baseline", width:"100%", mt: 1}}>
+                <Typography variant="body1" sx={{color: "white", ml: 2}}>Legend: </Typography>
+                <Typography variant="body1" sx={{color: "red", ml: 2}}>Overvalued</Typography>
+                <Typography variant="body1" sx={{color: "green", ml: 2, mr: 2}}>Undervalued</Typography>
                 <Button 
                     variant="outlined"
                     onClick={() => setUploaderOpen(true)}
