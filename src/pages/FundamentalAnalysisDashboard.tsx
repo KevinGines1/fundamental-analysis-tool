@@ -3,7 +3,7 @@ import CompaniesTable from '../components/CompaniesTable';
 import RatiosTable from '../components/RatiosTable';
 import FairValueTable from '../components/FairValueTable';
 import { listOfCompaniesHeaders } from '../utils/constants';
-import { Grid } from '@mui/material';
+import { Grid, Grow } from '@mui/material';
 import { 
   useAppSelector } from '../app/hooks';
 
@@ -25,19 +25,19 @@ function FundamentalyAnalysisDashboard() {
                 headers={listOfCompaniesHeaders} 
                 />
             </Grid>
-            <Grid item xs={5}>
-            { selectedCompanies.length >= 3 && 
-              <FairValueTable
-                title={"Fair Value Table"}
-                headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
-              />
-            }
-            </Grid>
-            {selectedCompanies.length >= 3 && 
+            <Grow in={selectedCompanies.length >= 3} {...(selectedCompanies.length >= 3 ? { timeout: 1000 } : {})}>
+              <Grid item xs={5}>
+                <FairValueTable
+                    title={"Fair Value Table"}
+                    headers={["Stock", "Price", "EPS (Basic)", "Fair Value"]}
+                  />
+              </Grid>
+            </Grow>
+            <Grow in={selectedCompanies.length >= 3} {...(selectedCompanies.length >= 3 ? { timeout: 1000 } : {})}>
               <Grid item xs={8}>
                 <RatiosTable />
               </Grid>
-            }
+            </Grow>
     </Grid>
     );
 }

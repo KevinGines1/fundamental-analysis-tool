@@ -1,3 +1,4 @@
+import "../styles/table.css";
 import React, { useState } from 'react';
 import { ReactSpreadsheetImport } from "react-spreadsheet-import";
 import Table from '@mui/material/Table';
@@ -5,9 +6,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { Alert, Box, Button, Card, Checkbox, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, Checkbox, Grow, Tooltip, Typography } from '@mui/material';
 import { alertStyle, secondaryButtonStyle} from '../styles/styles';
-import "../styles/table.css";
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -26,7 +26,7 @@ function getRowColor(row: Company, averageSectorPE: number) {
     } else if (row.PERatio === undefined) {
         return "blue";
     } else if (row.PERatio > averageSectorPE) {
-        return "red"; // overvalue
+        return "red"; // overvalued
     } else {
         return "green" // undervalued
     }
@@ -100,44 +100,32 @@ function CompaniesTable(props: CompaniesTableProps) {
             <ReactSpreadsheetImport isOpen={uploaderOpen} onClose={() => setUploaderOpen(false)} onSubmit={(data, file) => {
                 handleFileSubmit(data, file);
             }} fields={companySpreadsheetFields} />
-            {
-                companies.length !== 0 && 
+            <Grow in={companies.length !== 0} {...(companies.length !== 0 ? { timeout: 1000 } : {})}>
                 <TableContainer component={Card} sx={{ padding: 2, mt: 3}} className={"tableContainer"}>
-                        <Table 
-                            sx={{minWidth: 650}} 
-                            size="small"
-                            stickyHeader
-                        >
+                    <Table sx={{minWidth: 650}} size="small" stickyHeader>
                         <TableBody>
-                            
-                                <TableRow>
-                                {
-                                    headers.map((header, index)=>{
-                                        return(
-                                            <TableCell key={index}>
-                                                <Typography className={"tableHeader"}>{header}</Typography>
-                                            </TableCell>
-                                        );
-                                    })
-                                }
-                                </TableRow>
+                            <TableRow>
+                            {
+                                headers.map((header, index)=>{
+                                    return(
+                                        <TableCell key={index}>
+                                            <Typography className={"tableHeader"}>{header}</Typography>
+                                        </TableCell>
+                                    );
+                                })
+                            }
+                            </TableRow>
                             {
                                 companies.map((row: Company)=>{
                                     const rowColor = getRowColor(row, averageSectorPE);
                                     const companySelected = selectedCompanies.some((c: Company) => c.name === row.name);
                                     return(
-                                        <TableRow 
-                                            key={row.stockCode}
-                                            hover
-                                        >
+                                        <TableRow key={row.stockCode} hover>
                                             <TableCell size={"small"} padding={"checkbox"}>
                                                 <Checkbox checked={companySelected} onClick={() => {handleOnCheck(row, companySelected)}}/>
                                             </TableCell>
                                             <TableCell size={"small"}>
-                                                <Tooltip
-                                                    title={"Click to update company info & data"}
-                                                    placement={"right-start"}
-                                                >
+                                                <Tooltip title={"Click to update company info & data"} placement={"right-start"}>
                                                     <Button 
                                                         variant={"text"}
                                                         sx={{color: "white"}}
@@ -162,7 +150,7 @@ function CompaniesTable(props: CompaniesTableProps) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            }
+            </Grow>
             { showModal && <UpdateCompanyModal
                 showModal={showModal}
                 companyToEdit={companyToEdit}

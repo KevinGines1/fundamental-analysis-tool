@@ -1,5 +1,6 @@
-import React from 'react';
 import './App.css';
+import './index.css';
+import React from 'react';
 import FundamentalyAnalysisDashboard from './pages/FundamentalAnalysisDashboard';
 import AppInfoBar from './components/AppInfoBar';
 
