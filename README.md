@@ -11,7 +11,7 @@ Fundamental Analysis Tool is an app that performs all the calculations needed in
 
 # References
 - The Book of Secrets: A Fundamental Analysis Guide by Traders Den PH
-- Material UI
-- https://react-redux.js.org/tutorials/quick-start
-- https://www.behance.net/gallery/158583411/Fintech-Dashboard-%28FREE-Figma-template%29state=%7B%22queryStateId%22%3A%22sqsid-9a3153ef-a0bd-4cfa-bbbe-678288867591%22%7D&
-- https://devicon.dev/
+- [Material UI](https://mui.com/material-ui/getting-started/)
+- [React Redux](https://react-redux.js.org/tutorials/quick-start)
+- [Design](https://www.behance.net/gallery/158583411/Fintech-Dashboard-%28FREE-Figma-template%29state=%7B%22queryStateId%22%3A%22sqsid-9a3153ef-a0bd-4cfa-bbbe-678288867591%22%7D&)
+- [Icons](https://devicon.dev/)
