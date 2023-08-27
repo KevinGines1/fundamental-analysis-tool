@@ -1,5 +1,5 @@
 # Fundamental Analysis Tool
-Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided.
+Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided. This is a tool used to help the user identify which of the company stock is good to buy.
 
 # How to
 1. Prepare a spreadsheet that provides all the necessary information to quantitative fundamental analysis. You may gather all the information from: https://edge.pse.com.ph/companyDirectory/form.do
