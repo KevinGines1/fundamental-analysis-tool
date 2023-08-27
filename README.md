@@ -2,9 +2,9 @@
 Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided. This is a tool used to help the user identify which of the company stock is good to buy.
 
 # How to
-1. Prepare a spreadsheet that provides all the necessary information to quantitative fundamental analysis. You may gather all the information from: https://edge.pse.com.ph/companyDirectory/form.do
-2. Follow the template as shown in the app and uploade the spreadsheet file.
-3. You may click on the company's names to edit their data.
+1. Download the template file.
+2. Prepare the spreadsheet that provides all the necessary information for quantitative fundamental analysis. You may gather all the data from: https://edge.pse.com.ph/companyDirectory/form.do
+3. Once uploaded to the app, you may click on the company's names to edit their data.
 4. Select up to 5 companies to perform quantitative analysis on.
 5. The ratio table and fair value table should show once you selected at least 3 companies.
 6. You may take down notes based on the results on the left panel

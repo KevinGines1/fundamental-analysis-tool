@@ -7,7 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Alert, Box, Button, Card, Checkbox, Grow, Tooltip, Typography } from '@mui/material';
-import { alertStyle, secondaryButtonStyle} from '../styles/styles';
+import { alertStyle, primaryButtonStyle, secondaryButtonStyle} from '../styles/styles';
 
 import CompaniesTableProps from '../types/GenericTableProps';
 import Company from '../types/company';
@@ -96,6 +96,17 @@ function CompaniesTable(props: CompaniesTableProps) {
                     onClick={() => setUploaderOpen(true)}
                     sx={{...secondaryButtonStyle}}
                 >Upload spreadsheet</Button>
+            <a 
+                href={"Sample.xlsx"}
+                download={"FATool_Template.xlsx"}
+                type="vnd.ms-excel"
+            >
+                <Button
+                    variant="contained"
+                    sx={{...primaryButtonStyle}}
+                >
+                Download Template</Button>
+            </a>
             </Box>
             <ReactSpreadsheetImport isOpen={uploaderOpen} onClose={() => setUploaderOpen(false)} onSubmit={(data, file) => {
                 handleFileSubmit(data, file);
