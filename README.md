@@ -8,7 +8,7 @@ Fundamental Analysis Tool is an app that performs all the calculations needed in
 4. Select up to 5 companies to perform quantitative analysis on.
 5. The ratio table and fair value table should show once you selected at least 3 companies.
 6. You may take down notes based on the results on the left panel
----
+
 # References
 - The Book of Secrets: A Fundamental Analysis Guide by Traders Den PH
 - Material UI
