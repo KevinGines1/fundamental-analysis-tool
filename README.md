@@ -1,46 +1,17 @@
-# Getting Started with Create React App
+# Fundamental Analysis Tool
+Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# How to
+1. Prepare a spreadsheet that provides all the necessary information to quantitative fundamental analysis. You may gather all the information from: https://edge.pse.com.ph/companyDirectory/form.do
+2. Follow the template as shown in the app and uploade the spreadsheet file.
+3. You may click on the company's names to edit their data.
+4. Select up to 5 companies to perform quantitative analysis on.
+5. The ratio table and fair value table should show once you selected at least 3 companies.
+6. You may take down notes based on the results on the left panel
+---
+# References
+- The Book of Secrets: A Fundamental Analysis Guide by Traders Den PH
+- https://react-redux.js.org/tutorials/quick-start
+- https://www.behance.net/gallery/158583411/Fintech-Dashboard-%28FREE-Figma-template%29state=%7B%22queryStateId%22%3A%22sqsid-9a3153ef-a0bd-4cfa-bbbe-678288867591%22%7D&
+- Material UI
+- https://devicon.dev/
