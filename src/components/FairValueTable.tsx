@@ -19,7 +19,7 @@ function FairValueTable(props: CompaniesTableProps) {
     const data = getCompanyFairValues(selectedCompanies);
     return (
        <>
-        <Typography variant="h4" component="div" className={"tableLabel"}>{title}</Typography>
+        <Typography variant="h4" component="div" className={"tableLabel"} style={{fontFamily: "Montserrat, open-sans"}}>{title}</Typography>
             <TableContainer className={"tableContainer-fv"} component={Card} sx={{padding: 2}}>
                 <Table sx={{minWidth: 650}} size="small">
                     <TableBody>
@@ -27,7 +27,7 @@ function FairValueTable(props: CompaniesTableProps) {
                             {
                                 headers.map(header=>{
                                     return(
-                                        <TableCell key={header}><Typography className={"tableHeader"}>{header}</Typography></TableCell>
+                                        <TableCell key={header}><Typography className={"tableHeader"} style={{fontFamily: "Montserrat, open-sans"}}>{header}</Typography></TableCell>
                                     );
                                 })
                             }
@@ -36,18 +36,18 @@ function FairValueTable(props: CompaniesTableProps) {
                             data.map((row: Company)=>{
                                 return(
                                     <TableRow key={`${row.name}-${row.stockCode}`}>
-                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.stockCode}</Typography></TableCell>
-                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.stockPrice.toFixed(2)}</Typography></TableCell>
-                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.earningsPerShareBasic.toFixed(2)}</Typography></TableCell>
-                                        <TableCell className={"tableCell"}><Typography className="tableCell">{row.fairValue?.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.stockCode}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.stockPrice.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.earningsPerShareBasic.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.fairValue?.toFixed(2)}</Typography></TableCell>
                                     </TableRow>
                                 );
                             })
                         }
                         <TableRow>
                                         <TableCell rowSpan={2}/>
-                                        <TableCell className={"tableCell"} colSpan={2} align={"right"}><Typography className="tableCell">Average Sector P/E Ratio</Typography></TableCell>
-                                        <TableCell className={"tableCell"}><Typography className="tableCell">{averageSectorPE.toFixed(2)}</Typography></TableCell>
+                                        <TableCell className={"tableCell"} colSpan={2} align={"right"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>Average Sector P/E</Typography></TableCell>
+                                        <TableCell className={"tableCell"}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{averageSectorPE.toFixed(2)}</Typography></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -63,6 +63,7 @@ function FairValueTable(props: CompaniesTableProps) {
                     sx: {
                         background: "linear-gradient(102.27deg, #A453CB 0%, #8B10B6 100%);",
                         color: "white",
+                        fontFamily: "Montserrat, open-sans"
                     }
                 }}
             />

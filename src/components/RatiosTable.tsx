@@ -20,18 +20,18 @@ import { useAppSelector } from '../app/hooks';
 const generateRatioRow = (row: Ratio, companies: Company[]) => {
     return (
         <TableRow key={row.name}>
-            <TableCell colSpan={2}><Typography className="tableCell">{row.name}</Typography></TableCell>
+            <TableCell colSpan={2}><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.name}</Typography></TableCell>
             {companies.map((company, index) => {
                 return (
                     <TableCell 
                         key={`${index}-${row.name}-${company.name}`}
                         size={"small"}
                     >
-                        <Typography className="tableCell">{calculateRatio(row.name, row.formula, company).toFixed(2)}</Typography>
+                        <Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{calculateRatio(row.name, row.formula, company).toFixed(2)}</Typography>
                     </TableCell>
                 )
             })}
-            <TableCell><Typography className="tableCell">{row.guide}</Typography></TableCell>
+            <TableCell><Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>{row.guide}</Typography></TableCell>
         </TableRow>
     );
 }
@@ -44,7 +44,7 @@ function RatiosTable() {
     const profitabilityRatios: Ratio[] = get(groupedRatios, RatioClassication.PROFITABILITY, []);
     return(
         <>
-            <Typography variant="h4" className='tableLabel'>Ratios</Typography>
+            <Typography variant="h4" className='tableLabel' style={{fontFamily: "Montserrat, open-sans"}}>Ratios</Typography>
             <TableContainer component={Card} className={"tableContainer"} sx={{ padding: 2, mb: 10 }}>
                 <Table sx={{minWidth: 650}} size="small">
                     <TableBody>
@@ -52,14 +52,14 @@ function RatiosTable() {
                             <TableCell colSpan={2}></TableCell>
                             {selectedCompanies.map((company, index) => {
                                 return(
-                                    <TableCell key={`${index}-${company.stockCode}`}><Typography className="tableHeader">{company.stockCode}</Typography></TableCell>
+                                    <TableCell key={`${index}-${company.stockCode}`}><Typography className="tableHeader" style={{fontFamily: "Montserrat, open-sans"}}>{company.stockCode}</Typography></TableCell>
                                 );
                             })}
-                            <TableCell><Typography className="tableHeader">Guide</Typography></TableCell>
+                            <TableCell><Typography className="tableHeader" style={{fontFamily: "Montserrat, open-sans"}}>Guide</Typography></TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="tableHeader" align={"center"} colSpan={8}>
-                                <Typography className="tableHeader">
+                                <Typography className="tableHeader" style={{fontFamily: "Montserrat, open-sans", fontWeight: "bold"}}>
                                     {RatioClassication.LIQUIDITY_RATIO}
                                 </Typography>
                             </TableCell>
@@ -73,7 +73,7 @@ function RatiosTable() {
                         }
                         <TableRow>
                             <TableCell align={"center"} colSpan={8}>
-                                <Typography className="tableHeader">
+                                <Typography className="tableHeader" style={{fontFamily: "Montserrat, open-sans", fontWeight: "bold"}}>
                                     {RatioClassication.FINANCIAL_LEVERAGE}
                                 </Typography>
                             </TableCell>
@@ -87,7 +87,7 @@ function RatiosTable() {
                         }
                         <TableRow>
                             <TableCell  align={"center"} colSpan={8}>
-                                <Typography className="tableHeader">
+                                <Typography className="tableHeader" style={{fontFamily: "Montserrat, open-sans", fontWeight: "bold"}}>
                                     {RatioClassication.PROFITABILITY}
                                 </Typography>
                             </TableCell>

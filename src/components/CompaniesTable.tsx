@@ -75,10 +75,10 @@ function CompaniesTable(props: CompaniesTableProps) {
     
     return (
         <>
-            <Typography variant="h4" component="div" className="tableLabel">
+            <Typography variant="h4" component="div" className="tableLabel" style={{ fontFamily: "Montserrat, open-sans" }}>
                 {`${companies[0]?.sector || title}`}</Typography>
                 {   companies.length !== 0 && 
-                    <Typography variant="h4" className="tableSubtext">{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
+                    <Typography variant="h4" className="tableSubtext" style={{ fontFamily: "Montserrat, open-sans" }}>{`Average Sector PE: ${averageSectorPE.toFixed(2)}`}</Typography>
                 }
             <Alert 
                 severity={"info"} 
@@ -88,9 +88,9 @@ function CompaniesTable(props: CompaniesTableProps) {
                 {companies.length === 0? "Upload a spreadsheet to begin" : "Select up to 5 companies to analyze."}
             </Alert>
             <Box sx={{display: "flex", justifyContent:"flex-end", alignItems: "baseline", width:"100%", mt: 1}}>
-                <Typography variant="body1" sx={{color: "white", ml: 2}}>Legend: </Typography>
-                <Typography variant="body1" sx={{color: "red", ml: 2}}>Overvalued</Typography>
-                <Typography variant="body1" sx={{color: "green", ml: 2, mr: 2}}>Undervalued</Typography>
+                <Typography variant="body1" sx={{color: "white", ml: 2, fontFamily: "Montserrat, open-sans"}}>Legend: </Typography>
+                <Typography variant="body1" sx={{color: "red", ml: 2, fontFamily: "Montserrat, open-sans"}}>Overvalued</Typography>
+                <Typography variant="body1" sx={{color: "green", ml: 2, mr: 2, fontFamily: "Montserrat, open-sans"}}>Undervalued</Typography>
                 <Button 
                     variant="outlined"
                     onClick={() => setUploaderOpen(true)}
@@ -109,7 +109,7 @@ function CompaniesTable(props: CompaniesTableProps) {
                                 headers.map((header, index)=>{
                                     return(
                                         <TableCell key={index}>
-                                            <Typography className={"tableHeader"}>{header}</Typography>
+                                            <Typography className={"tableHeader"} style={{fontFamily: "Montserrat, open-sans"}}>{header}</Typography>
                                         </TableCell>
                                     );
                                 })
@@ -133,16 +133,16 @@ function CompaniesTable(props: CompaniesTableProps) {
                                                             handleButtonClick(row);
                                                         }}
                                                     >
-                                                        <Typography className="tableCell">
+                                                        <Typography className="tableCell" style={{fontFamily: "Montserrat, open-sans"}}>
                                                         {row.name}
                                                         </Typography>
                                                     </Button>
                                                 </Tooltip>
                                             </TableCell>
-                                            <TableCell size={"small"}><Typography className={"tableCell"}>{row.stockCode}</Typography></TableCell>
-                                            <TableCell size={"small"}><Typography className={"tableCell"}>{row.stockPrice.toFixed(2)}</Typography></TableCell>
-                                            <TableCell size={"small"}><Typography className={"tableCell"}>{row.earningsPerShareBasic?.toFixed(2) || 0.0}</Typography></TableCell>
-                                            <TableCell size={"small"}><Typography sx={{color: rowColor, fontWeight: "bold"}}>{Number(row.PERatio)?.toFixed(2) || 0.0}</Typography></TableCell>
+                                            <TableCell size={"small"}><Typography className={"tableCell"} style={{fontFamily: "Montserrat, open-sans"}}>{row.stockCode}</Typography></TableCell>
+                                            <TableCell size={"small"}><Typography className={"tableCell"} style={{fontFamily: "Montserrat, open-sans"}}>{row.stockPrice.toFixed(2)}</Typography></TableCell>
+                                            <TableCell size={"small"}><Typography className={"tableCell"} style={{fontFamily: "Montserrat, open-sans"}}>{row.earningsPerShareBasic?.toFixed(2) || 0.0}</Typography></TableCell>
+                                            <TableCell size={"small"}><Typography sx={{color: rowColor, fontWeight: "bold", fontFamily: "Montserrat, open-sans"}}>{Number(row.PERatio)?.toFixed(2) || 0.0}</Typography></TableCell>
                                         </TableRow>
                                     );
                                 })

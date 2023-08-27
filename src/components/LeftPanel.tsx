@@ -3,7 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import CodeIcon from '@mui/icons-material/Code';
 import SourceIcon from '@mui/icons-material/Source';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import { Drawer, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse, SvgIcon } from "@mui/material";
+import { Drawer, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse, SvgIcon, Typography } from "@mui/material";
 import { aboutText, devText, githubProfile, linkedInProfile, referencesText } from "../utils/constants";
 
 interface DrawerProps {
@@ -41,12 +41,12 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                         <ListItemIcon>
                             <InfoIcon sx={{color: "white"}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"About"} />
+                        <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>About</Typography>} />
                         </ListItemButton>
                     </ListItem>
                     <Collapse in={openAbout}>
                         <ListItem sx={{pl: 4}}>
-                            <ListItemText primary={aboutText} />
+                            <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>{aboutText}</Typography>} />
                         </ListItem>
                     </Collapse>
                     <ListItem disablePadding>
@@ -54,12 +54,12 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                         <ListItemIcon>
                             <CodeIcon sx={{color: "white"}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"The Developer"} />
+                        <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>The Developer</Typography>} />
                         </ListItemButton>
                     </ListItem>
                     <Collapse in={openDev}>
                         <ListItem sx={{pl: 4}}>
-                            <ListItemText primary={devText} />
+                            <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>{devText}</Typography>} />
                         </ListItem>
                     </Collapse>
                     {/* SOCIALS */}
@@ -68,7 +68,7 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                         <ListItemIcon>
                             <AlternateEmailIcon sx={{color: "white"}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"Socials"} />
+                        <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>Socials</Typography>} />
                         </ListItemButton>
                     </ListItem>
                     <Collapse in={openSocials}>
@@ -81,7 +81,7 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                                     </svg>
                                 </SvgIcon>
                             </ListItemIcon>
-                            <ListItemText primary={"Github"} />
+                            <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>Github</Typography>} />
                             </ListItemButton>
                         </ListItem>
                         <ListItem sx={{pl: 4}}>
@@ -93,7 +93,7 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                                 </svg>
                                 </SvgIcon>
                             </ListItemIcon>
-                            <ListItemText primary={"Linkedin"} />
+                            <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>Linkedin</Typography>} />
                             </ListItemButton>
                         </ListItem>
                     </Collapse>
@@ -103,12 +103,12 @@ function LeftPanel(props: DrawerProps): JSX.Element {
                         <ListItemIcon>
                             <SourceIcon sx={{color: "white"}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"References"} />
+                        <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>References</Typography>} />
                         </ListItemButton>
                     </ListItem>
                     <Collapse in={openReferences}>
                         <ListItem sx={{pl: 4}}>
-                            <ListItemText primary={referencesText} />
+                        <ListItemText disableTypography primary={<Typography variant="body2" style={{ fontFamily: "Montserrat, open-sans"}}>{referencesText}</Typography>} />
                         </ListItem>
                     </Collapse>
                 </List>

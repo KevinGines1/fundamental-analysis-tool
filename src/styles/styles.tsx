@@ -2,7 +2,8 @@ export const alertStyle = {
     background: "linear-gradient(102.27deg, #6F59E6 0%, #4F1797 100%);", 
     mb: 2,
     mt: 2,
-    overflowX: "hidden"
+    overflowX: "hidden",
+    fontFamily: "Montserrat, open-sans"
 }
 
 export const primaryButtonStyle = {
@@ -23,5 +24,6 @@ export const secondaryButtonStyle = {
     ":hover": {
         borderColor: "rgba(111,89,230,1)", 
         color: "rgba(111,89,230,1)"
-    }
+    },
+    fontFamily: "Montserrat, open-sans"
 }

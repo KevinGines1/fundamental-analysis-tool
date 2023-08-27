@@ -21,7 +21,7 @@ function AppInfoBar() {
               <MenuIcon />
             </IconButton>
             <LeftPanel open={open} onClose={(): void => setOpen(false)} />
-            <Typography className={"appName"} variant="h6" sx={{ flexGrow: 1 }}>
+            <Typography className={"appName"} variant="h6" sx={{ flexGrow: 1, fontFamily: "Montserrat, open-sans" }}>
               Fundamental Analysis Tool
             </Typography>
         </Toolbar>
