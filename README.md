@@ -1,5 +1,7 @@
 # Fundamental Analysis Tool
-Fundamental Analysis Tool is an app that performs all the calculations needed in performing quantitative analysis on the companies provided. This is a tool used to help the user identify which of the company stock is good to buy.
+Fundamental Analysis Tool is an [app](https://frabjous-travesseiro-21e5ee.netlify.app/) that performs all the calculations needed in performing quantitative analysis on the companies provided. This is a tool used to help the user identify which of the company stock is good to buy.
+
+Link to app: https://frabjous-travesseiro-21e5ee.netlify.app/
 
 # How to
 1. Download the template file.
